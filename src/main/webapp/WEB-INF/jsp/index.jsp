@@ -164,7 +164,7 @@
         <tr>
             <td>capacidadeDeTransporte</td>
             <td>float</td>
-            <td>Capacidade de transpote do caminhão </td>
+            <td>Capacidade de transpote do caminhão em KG</td>
         </tr>
         <tr>
             <td>tipoCarroceria</td>
@@ -174,7 +174,7 @@
         <tr>
             <td>torque</td>
             <td>float</td>
-            <td>Torque do caminhão</td>
+            <td>Torque do caminhão em mkgf</td>
         </tr>
         </tbody>
     </table>
