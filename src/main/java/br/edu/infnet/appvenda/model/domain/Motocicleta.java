@@ -1,6 +1,6 @@
 package br.edu.infnet.appvenda.model.domain;
 
-public class Motocicleta {
+public class Motocicleta extends Veiculo{
 
     public int cilindrada;
     public boolean possuiCarenagem;
@@ -8,7 +8,7 @@ public class Motocicleta {
 
     @Override
     public String toString() {
-        return  cilindrada + ";" +  possuiCarenagem + ";" + numeroDeMarchas;
+        return  cilindrada + ";" +  possuiCarenagem + ";" + numeroDeMarchas + ';' + super.toString();
     }
 
 }
