@@ -6,6 +6,11 @@ public class Veiculo {
     private  float valor;
     private  String marca;
 
+    public float calcularVenda(){
+        System.out.println("Calcular venda mãe");
+        return valor * 2;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -32,6 +37,6 @@ public class Veiculo {
 
     @Override
     public String toString() {
-        return nome + ";" + valor + ";" + marca;
+        return nome + ";" + valor + ";" + marca + calcularVenda();
     }
 }

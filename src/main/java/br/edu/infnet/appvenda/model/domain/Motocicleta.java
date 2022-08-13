@@ -6,6 +6,14 @@ public class Motocicleta extends Veiculo{
     private boolean possuiCarenagem;
     private int numeroDeMarchas;
 
+    @Override
+    public float calcularVenda() {
+        System.out.println("Calcular venda motocicleta");
+        float valorCarenagem = possuiCarenagem ? 500 : 100;
+        float valorCilindrada = cilindrada * 0.045f;
+        return super.calcularVenda()+valorCarenagem + valorCilindrada;
+    }
+
     public int getCilindrada() {
         return cilindrada;
     }

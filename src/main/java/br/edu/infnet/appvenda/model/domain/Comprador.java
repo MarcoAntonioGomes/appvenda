@@ -7,6 +7,7 @@ public class Comprador {
     private  String email;
 
 
+
     public Comprador(String nome, String cpf, String email) {
         this.nome = nome;
         this.cpf = cpf;

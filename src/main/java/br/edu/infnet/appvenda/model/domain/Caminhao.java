@@ -6,6 +6,14 @@ public class Caminhao  extends Veiculo{
     private String tipoCarroceria;
     private float torque;
 
+
+    @Override
+    public float calcularVenda() {
+
+        float valorPorCapacidadeDeTransporte = capacidadeDeTransporte*0.005f;
+        return getValor() + valorPorCapacidadeDeTransporte;
+    }
+
     public float getCapacidadeDeTransporte() {
         return capacidadeDeTransporte;
     }
