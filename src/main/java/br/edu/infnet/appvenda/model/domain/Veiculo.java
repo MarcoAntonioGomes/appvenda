@@ -1,17 +1,15 @@
 package br.edu.infnet.appvenda.model.domain;
 
-public abstract class Veiculo {
+import br.edu.infnet.appvenda.interfaces.IPrinter;
+
+public abstract class Veiculo implements IPrinter {
 
     private String nome;
     private  float valor;
     private  String marca;
 
-    public abstract void impressao();
 
-    public float calcularVenda(){
-        System.out.println("Calcular venda mãe");
-        return valor * 2;
-    }
+    public abstract float calcularVenda();
 
     public String getNome() {
         return nome;

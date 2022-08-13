@@ -1,7 +1,7 @@
 package br.edu.infnet.appvenda;
 
 import br.edu.infnet.appvenda.model.domain.Automovel;
-import br.edu.infnet.appvenda.model.test.AppVeiculo;
+import br.edu.infnet.appvenda.model.test.AppImpressao;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ public class AutomovelTeste implements ApplicationRunner {
         automovel1.setValor(30000);
         automovel1.setMarca("volkswagen");
 
-        new AppVeiculo("Inclusão do Automovel Gol!!!").relatorio(automovel1);
+        new AppImpressao().relatorio(automovel1,"Inclusão do Automovel Gol!!!");
 
         Automovel automovel2 = new Automovel();
         automovel2.setPossuiAirbag(false);
@@ -32,7 +32,7 @@ public class AutomovelTeste implements ApplicationRunner {
         automovel2.setMarca("Fiat");
 
 
-         new AppVeiculo("Inclusão do Automovel Strada!!!").relatorio(automovel2);
+         new AppImpressao().relatorio(automovel2, "Inclusão do Automovel Strada!!!");
 
 
         Automovel automovel3 = new Automovel();
@@ -44,6 +44,6 @@ public class AutomovelTeste implements ApplicationRunner {
         automovel3.setMarca("Audi");
 
 
-        new AppVeiculo("Inclusão do Automovel A4 !!!").relatorio(automovel3);
+        new AppImpressao().relatorio(automovel3, "Inclusão do Automovel A4 !!!");
     }
 }

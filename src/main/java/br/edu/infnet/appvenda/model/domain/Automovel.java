@@ -37,6 +37,13 @@ public class Automovel extends Veiculo{
     }
 
     @Override
+    public float calcularVenda() {
+        float valorPorQuantidadeDePortas = quantidadeDePortas == 4 ? 1000 : 500;
+        float valorPorPossuirAirbag = possuiAirbag ? 2000 : 0;
+        return getValor() * 2 + valorPorQuantidadeDePortas + valorPorPossuirAirbag;
+    }
+
+    @Override
     public String toString() {
         return  quantidadeDePortas + ";" + tipo + ";" + possuiAirbag  + ';' + super.toString();
     }
