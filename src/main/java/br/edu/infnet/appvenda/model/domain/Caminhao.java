@@ -8,6 +8,12 @@ public class Caminhao  extends Veiculo{
 
 
     @Override
+    public void impressao() {
+        System.out.println("#Caminhão");
+        System.out.println(this);
+    }
+
+    @Override
     public float calcularVenda() {
 
         float valorPorCapacidadeDeTransporte = capacidadeDeTransporte*0.005f;

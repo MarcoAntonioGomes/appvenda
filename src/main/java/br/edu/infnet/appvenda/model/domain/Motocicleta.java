@@ -7,6 +7,12 @@ public class Motocicleta extends Veiculo{
     private int numeroDeMarchas;
 
     @Override
+    public void impressao() {
+        System.out.println("#Motocicleta");
+        System.out.println(this);
+    }
+
+    @Override
     public float calcularVenda() {
         System.out.println("Calcular venda motocicleta");
         float valorCarenagem = possuiCarenagem ? 500 : 100;

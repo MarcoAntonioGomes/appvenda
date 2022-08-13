@@ -32,6 +32,11 @@ public class Venda {
         this.avista = avista;
     }
 
+    public void impressao() {
+        System.out.println("#Venda");
+        System.out.println(this);
+    }
+
     @Override
     public String toString() {
         return descricao + ";" +data + ";" +avista;

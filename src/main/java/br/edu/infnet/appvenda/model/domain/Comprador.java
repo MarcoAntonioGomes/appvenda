@@ -39,7 +39,10 @@ public class Comprador {
     }
 
 
-
+    public void impressao() {
+        System.out.println("#Comprador");
+        System.out.println(this);
+    }
 
 
     @Override

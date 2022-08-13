@@ -1,10 +1,12 @@
 package br.edu.infnet.appvenda.model.domain;
 
-public class Veiculo {
+public abstract class Veiculo {
 
     private String nome;
     private  float valor;
     private  String marca;
+
+    public abstract void impressao();
 
     public float calcularVenda(){
         System.out.println("Calcular venda mãe");

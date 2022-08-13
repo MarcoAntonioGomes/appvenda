@@ -31,6 +31,12 @@ public class Automovel extends Veiculo{
     }
 
     @Override
+    public void impressao() {
+        System.out.println("#Automovel");
+        System.out.println(this);
+    }
+
+    @Override
     public String toString() {
         return  quantidadeDePortas + ";" + tipo + ";" + possuiAirbag  + ';' + super.toString();
     }
