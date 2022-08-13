@@ -1,8 +1,10 @@
 package br.edu.infnet.appvenda.model.domain;
 
+import br.edu.infnet.appvenda.interfaces.IPrinter;
+
 import java.time.LocalDateTime;
 
-public class Venda {
+public class Venda implements IPrinter {
 
     private String descricao;
     private LocalDateTime data;
@@ -32,13 +34,15 @@ public class Venda {
         this.avista = avista;
     }
 
-    public void impressao() {
-        System.out.println("#Venda");
-        System.out.println(this);
-    }
 
     @Override
     public String toString() {
         return descricao + ";" +data + ";" +avista;
+    }
+
+    @Override
+    public void impressao() {
+        System.out.println("#Venda");
+        System.out.println(this);
     }
 }

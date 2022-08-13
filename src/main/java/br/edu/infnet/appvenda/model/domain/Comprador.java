@@ -1,6 +1,8 @@
 package br.edu.infnet.appvenda.model.domain;
 
-public class Comprador {
+import br.edu.infnet.appvenda.interfaces.IPrinter;
+
+public class Comprador implements IPrinter {
 
     private String nome;
     private  String cpf;
@@ -39,15 +41,14 @@ public class Comprador {
     }
 
 
-    public void impressao() {
-        System.out.println("#Comprador");
-        System.out.println(this);
-    }
-
-
     @Override
     public String toString() {
         return nome + ";" + cpf + ";" + email;
     }
 
+    @Override
+    public void impressao() {
+        System.out.println("#Comprador");
+        System.out.println(this);
+    }
 }
