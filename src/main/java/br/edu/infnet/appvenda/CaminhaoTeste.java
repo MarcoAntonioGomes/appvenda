@@ -1,6 +1,7 @@
 package br.edu.infnet.appvenda;
 
 import br.edu.infnet.appvenda.model.domain.Caminhao;
+import br.edu.infnet.appvenda.model.test.AppVeiculo;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -20,7 +21,9 @@ public class CaminhaoTeste implements ApplicationRunner {
         caminhao1.setMarca( "Iveco");
         caminhao1.setValor(  200000);
 
-        System.out.println(caminhao1);
+
+        new AppVeiculo("Inclusão do caminhão Vertis!!!").relatorio(caminhao1);
+
 
         Caminhao caminhao2 = new Caminhao();
         caminhao2.setCapacidadeDeTransporte( 9000);
@@ -31,7 +34,8 @@ public class CaminhaoTeste implements ApplicationRunner {
         caminhao2.setValor(  100000);
 
 
-        System.out.println(caminhao2);
+         new AppVeiculo("Inclusão do caminhão 45s14!!!").relatorio(caminhao2);
+
 
         Caminhao caminhao3 = new Caminhao();
         caminhao3.setCapacidadeDeTransporte( 10000);
@@ -41,6 +45,8 @@ public class CaminhaoTeste implements ApplicationRunner {
         caminhao3.setMarca( "Volvo");
         caminhao3.setValor(  150000);
 
-        System.out.println(caminhao3);
+
+        new AppVeiculo("Inclusão do caminhão 1313!!!") .relatorio(caminhao3);
+
     }
 }

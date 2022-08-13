@@ -1,6 +1,7 @@
 package br.edu.infnet.appvenda;
 
 import br.edu.infnet.appvenda.model.domain.Motocicleta;
+import br.edu.infnet.appvenda.model.test.AppVeiculo;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -19,7 +20,9 @@ public class MotocicletaTeste implements ApplicationRunner {
         motocicleta1.setMarca( "Honda");
         motocicleta1.setValor( 30000);
 
-        System.out.println(motocicleta1 );
+
+       new AppVeiculo("Inclusão da motocicleta CB300!!!").relatorio(motocicleta1);
+
 
         Motocicleta motocicleta2 = new Motocicleta();
         motocicleta2.setPossuiCarenagem ( false);
@@ -29,7 +32,9 @@ public class MotocicletaTeste implements ApplicationRunner {
         motocicleta2.setMarca( "Kawasaki");
         motocicleta2.setValor( 23000);
 
-        System.out.println(motocicleta2);
+
+       new AppVeiculo("Inclusão da motocicleta Z400!!!").relatorio(motocicleta2);
+
 
         Motocicleta motocicleta3 = new Motocicleta();
         motocicleta3.setPossuiCarenagem ( true);
@@ -39,6 +44,8 @@ public class MotocicletaTeste implements ApplicationRunner {
         motocicleta3.setMarca( "Honda");
         motocicleta3.setValor( 8000);
 
-        System.out.println(motocicleta3);
+
+        new AppVeiculo("Inclusão da motocicleta CG Titan!!!").relatorio(motocicleta3);
+
     }
 }
