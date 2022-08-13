@@ -7,6 +7,35 @@
     <title>AppVendas</title>
 </head>
 <body>
+
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/automovel/lista">Automovel</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/caminhao/lista">Caminhão</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/motocicleta/lista">Motocicleta</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/veiculo/lista">Veiculo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/comprador/lista">Comprador</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/venda/lista">Venda</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
 <div class="container mt-3">
     <h2>AppVendas</h2>
     <p>Projeto de Gestão de Venda de Veículos</p>
@@ -39,7 +68,7 @@
         </tbody>
     </table>
 
-    <h3>Classe: Cliente</h3>
+    <h3>Classe: Comprador</h3>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -52,17 +81,17 @@
         <tr>
             <td>nome</td>
             <td>String</td>
-            <td>Nome do cliente</td>
+            <td>Nome do comprador</td>
         </tr>
         <tr>
             <td>cpf</td>
             <td>String</td>
-            <td>CPF do cliente</td>
+            <td>CPF do comprador</td>
         </tr>
         <tr>
             <td>email</td>
             <td>String</td>
-            <td>email do cliente</td>
+            <td>email do comprador</td>
         </tr>
         </tbody>
     </table>
