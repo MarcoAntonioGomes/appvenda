@@ -1,13 +1,106 @@
 package br.edu.infnet.appvenda.controller;
 
+import br.edu.infnet.appvenda.model.domain.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 public class VendaController {
 
+    private static List<Venda> vendas = null;
+
     @GetMapping(value = "/venda/lista")
-    public String telaLista(){
+    public String telaLista(Model model){
+
+        vendas = new ArrayList<>();
+
+        Venda venda = new Venda(new Comprador("Jose","11122233344","jose@gmail.com"));
+        venda.setDescricao("Venda 1");
+        venda.setAvista(  true);
+        Set<Veiculo> veiculos = new HashSet<Veiculo>();
+
+        Automovel automovel1 = new Automovel();
+        automovel1.setPossuiAirbag(true);
+        automovel1.setQuantidadeDePortas(4);
+        automovel1.setTipo("Carro comum");
+        automovel1.setNome("Gol");
+        automovel1.setValor(30000);
+        automovel1.setMarca("volkswagen");
+        veiculos.add(automovel1);
+
+        Motocicleta motocicleta = new Motocicleta();
+        motocicleta.setPossuiCarenagem ( false);
+        motocicleta.setNumeroDeMarchas ( 5);
+        motocicleta.setCilindrada( 400);
+        motocicleta.setNome( "Z400");
+        motocicleta.setMarca( "Kawasaki");
+        motocicleta.setValor( 23000);
+
+        veiculos.add(motocicleta);
+
+
+        Caminhao caminhao2 = new Caminhao();
+        caminhao2.setCapacidadeDeTransporte( 9000);
+        caminhao2.setTipoCarroceria( "Plataforma");
+        caminhao2.setTorque( 300);
+        caminhao2.setNome( "45s14");
+        caminhao2.setMarca( "Iveco");
+        caminhao2.setValor(  100000);
+
+        veiculos.add(caminhao2);
+
+        venda.setVeiculos(veiculos);
+
+
+
+
+        Venda venda2 = new Venda(new Comprador("Maria","11122233355","maria@gmail.com"));
+        venda2.setDescricao(  "Venda 2");
+        venda2.setAvista(  false);
+
+        Motocicleta motocicleta2 = new Motocicleta();
+        motocicleta2.setPossuiCarenagem ( false);
+        motocicleta2.setNumeroDeMarchas ( 5);
+        motocicleta2.setCilindrada( 400);
+        motocicleta2.setNome( "Z400");
+        motocicleta2.setMarca( "Kawasaki");
+        motocicleta2.setValor( 23000);
+
+        veiculos = new HashSet<Veiculo>();
+        veiculos.add(motocicleta2);
+        venda2.setVeiculos(veiculos);
+
+
+
+        Venda venda3 = new Venda(new Comprador("Joao","11122233366","joao@gmail.com"));
+        venda3.setDescricao(  "Venda 3");
+        venda3.setAvista(  true);
+
+        Caminhao caminhao3 = new Caminhao();
+        caminhao3.setCapacidadeDeTransporte( 10000);
+        caminhao3.setTipoCarroceria( "Prancha");
+        caminhao3.setTorque( 400);
+        caminhao3.setNome( "1313");
+        caminhao3.setMarca( "Volvo");
+        caminhao3.setValor(  150000);
+
+        veiculos = new HashSet<Veiculo>();
+        veiculos.add(caminhao3);
+        venda3.setVeiculos(veiculos);
+
+       vendas.add(venda);
+       vendas.add(venda2);
+       vendas.add(venda3);
+
+        model.addAttribute("listagem", vendas);
+
+
         return "venda/lista";
     }
 

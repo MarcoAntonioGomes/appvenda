@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
@@ -55,30 +56,16 @@
         </tr>
         </thead>
         <tbody>
+       <c:forEach var="a" items="${listagem}">
         <tr>
-            <td>Strada</td>
-            <td>R$ 50 000</td>
-            <td>Fiat</td>
-            <td>2</td>
-            <td>Caminhonete</td>
-            <td>Não </td>
+            <td>${a.nome}</td>
+            <td>${a.valor}</td>
+            <td>${a.marca}</td>
+            <td>${a.quantidadeDePortas}</td>
+            <td>${a.tipo}</td>
+            <td>${a.possuiAirbag}</td>
         </tr>
-        <tr>
-            <td>A4</td>
-            <td>R$ 400 000</td>
-            <td>Audi</td>
-            <td>4</td>
-            <td>Esportivo</td>
-            <td>Sim </td>
-        </tr>
-        <tr>
-            <td>Gol</td>
-            <td>R$ 30 000</td>
-            <td>Volkswagen</td>
-            <td>4</td>
-            <td>Comum</td>
-            <td>Não</td>
-        </tr>
+       </c:forEach>
         </tbody>
     </table>
 

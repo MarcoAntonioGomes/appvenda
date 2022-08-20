@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
@@ -55,30 +56,17 @@
         </tr>
         </thead>
         <tbody>
+
+        <c:forEach var="c" items="${listagem}">
         <tr>
-            <td>Vertis</td>
-            <td>R$ 200 000</td>
-            <td>Iveco</td>
-            <td>13000</td>
-            <td>Bau</td>
-            <td>500 </td>
+            <td>${c.nome}</td>
+            <td>${c.valor}</td>
+            <td>${c.marca}</td>
+            <td>${c.capacidadeDeTransporte}</td>
+            <td>${c.tipoCarroceria}</td>
+            <td>${c.torque}</td>
         </tr>
-        <tr>
-            <td>Truck</td>
-            <td>R$ 400 000</td>
-            <td>Ford</td>
-            <td>10000</td>
-            <td>Prancha</td>
-            <td>600 </td>
-        </tr>
-        <tr>
-            <td>Toco</td>
-            <td>R$ 200 0000</td>
-            <td>Scania</td>
-            <td>10000</td>
-            <td>Bau</td>
-            <td>350</td>
-        </tr>
+        </c:forEach>
         </tbody>
     </table>
 

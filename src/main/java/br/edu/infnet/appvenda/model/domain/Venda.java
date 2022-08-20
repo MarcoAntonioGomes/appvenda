@@ -45,6 +45,14 @@ public class Venda implements IPrinter {
         this.veiculos = veiculos;
     }
 
+    public LocalDateTime getData() {
+        return data;
+    }
+
+    public void setData(LocalDateTime data) {
+        this.data = data;
+    }
+
     @Override
     public String toString() {
         return descricao + ";" +data + ";" +avista + ";" + comprador + ";" + "Quantidade de Veículos: " + veiculos.size();

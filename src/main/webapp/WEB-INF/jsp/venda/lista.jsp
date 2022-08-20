@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
@@ -50,21 +51,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>Venda de Automovel</td>
-            <td>08/08/2022</td>
-            <td>Sim</td>
-        </tr>
-        <tr>
-            <td>Venda de Caminhão</td>
-            <td>08/08/2022</td>
-            <td>Não</td>
-        </tr>
-        <tr>
-            <td>Venda de Motocicleta</td>
-            <td>08/08/2022</td>
-            <td>Sim</td>
-        </tr>
+        <c:forEach var="v" items="${listagem}">
+            <tr>
+                <td>${v.descricao}</td>
+                <td>${v.data}</td>
+                <td>${v.avista}</td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
 
