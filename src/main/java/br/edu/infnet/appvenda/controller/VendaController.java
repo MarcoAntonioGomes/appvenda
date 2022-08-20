@@ -6,24 +6,32 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 @Controller
 public class VendaController {
 
-    private static List<Venda> vendas  = new ArrayList<>();
+    private static Map<Integer, Venda> mapaVenda = new HashMap<>();
+    private static Integer id = 1;
 
-   public static void incluir(Venda venda){
-        vendas.add(venda);
-        new AppImpressao().relatorio(venda,"Inclusão da venda " + venda.getDescricao() + " realizada com sucesso!!");
+    public static void incluir(Venda venda) {
+
+        venda.setId(id++);
+        mapaVenda.put(venda.getId(), venda);
+
+        new AppImpressao().relatorio(venda, "Inclusão da venda " + venda.getDescricao() + " realizada com sucesso!!");
     }
 
-    @GetMapping(value = "/venda/lista")
-    public String telaLista(Model model){
+    public static Collection<Venda> obterLista(){
+        return mapaVenda.values();
+    }
 
-        model.addAttribute("listagem", vendas);
+
+    @GetMapping(value = "/venda/lista")
+    public String telaLista(Model model) {
+
+        model.addAttribute("listagem", obterLista());
         return "venda/lista";
     }
 

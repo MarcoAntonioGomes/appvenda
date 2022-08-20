@@ -6,24 +6,33 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class AutomovelController {
 
-    private static List<Automovel> automoveis =  new ArrayList<>();
-
+    private static Map<Integer, Automovel> mapaAutomovel = new HashMap<>();
+    private static Integer id = 1;
 
     public static void incluir(Automovel automovel){
-        automoveis.add(automovel);
+
+        automovel.setId(id++);
+        mapaAutomovel.put(automovel.getId(),automovel);
+
         new AppImpressao().relatorio(automovel,"Inclusão do Automovel " + automovel.getNome() + " realizada com sucesso!!!");
+    }
+
+    public static Collection<Automovel> obterLista(){
+        return mapaAutomovel.values();
     }
 
     @GetMapping(value = "/automovel/lista")
     public String telaLista(Model model){
 
-        model.addAttribute("listagem", automoveis);
+        model.addAttribute("listagem", obterLista());
 
         return "automovel/lista";
     }

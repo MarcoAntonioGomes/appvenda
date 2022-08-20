@@ -4,6 +4,7 @@ import br.edu.infnet.appvenda.interfaces.IPrinter;
 
 public class Comprador implements IPrinter {
 
+    private Integer id;
     private String nome;
     private  String cpf;
     private  String email;
@@ -40,6 +41,13 @@ public class Comprador implements IPrinter {
         this.email = email;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {

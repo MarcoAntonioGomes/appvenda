@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public abstract class Veiculo implements IPrinter {
 
+    private Integer id;
     private String nome;
     private  float valor;
     private  String marca;
@@ -35,6 +36,14 @@ public abstract class Veiculo implements IPrinter {
 
     public void setMarca(String marca) {
         this.marca = marca;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override

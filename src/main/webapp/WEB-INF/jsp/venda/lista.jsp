@@ -45,6 +45,7 @@
     <table class="table table-striped">
         <thead>
         <tr>
+            <th>ID</th>
             <th>Descrição</th>
             <th>Data</th>
             <th>A vista</th>
@@ -53,6 +54,7 @@
         <tbody>
         <c:forEach var="v" items="${listagem}">
             <tr>
+                <td>${v.id}</td>
                 <td>${v.descricao}</td>
                 <td>${v.data}</td>
                 <td>${v.avista}</td>

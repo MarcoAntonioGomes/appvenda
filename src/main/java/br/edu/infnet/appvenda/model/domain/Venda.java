@@ -3,11 +3,11 @@ package br.edu.infnet.appvenda.model.domain;
 import br.edu.infnet.appvenda.interfaces.IPrinter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 
 public class Venda implements IPrinter {
 
+    private Integer id;
     private String descricao;
     private LocalDateTime data;
     private boolean avista;
@@ -51,6 +51,14 @@ public class Venda implements IPrinter {
 
     public void setData(LocalDateTime data) {
         this.data = data;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override
