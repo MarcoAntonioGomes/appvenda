@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
@@ -51,21 +52,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>Jose</td>
-            <td>11122233344</td>
-            <td>jose@gmail.com</td>
-        </tr>
-        <tr>
-            <td>Maria</td>
-            <td>11122233355</td>
-            <td>maria@gmail.com</td>
-        </tr>
-        <tr>
-            <td>Pedro</td>
-            <td>11155522237</td>
-            <td>pedro@gmail.com</td>
-        </tr>
+        <c:forEach var="c" items="${listagem}">
+            <tr>
+                <td>${c.nome}</td>
+                <td>${c.cpf}</td>
+                <td>${c.email}</td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
 

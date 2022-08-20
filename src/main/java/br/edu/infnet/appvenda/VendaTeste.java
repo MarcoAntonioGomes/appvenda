@@ -1,6 +1,7 @@
 package br.edu.infnet.appvenda;
 
 
+import br.edu.infnet.appvenda.controller.VendaController;
 import br.edu.infnet.appvenda.model.domain.*;
 import br.edu.infnet.appvenda.model.test.AppImpressao;
 import org.springframework.boot.ApplicationArguments;
@@ -56,7 +57,7 @@ public class VendaTeste implements ApplicationRunner {
 
         venda.setVeiculos(veiculos);
 
-        new AppImpressao().relatorio(venda,"Inclusão da venda 1 !!!");
+        VendaController.incluir(venda);
 
 
         Venda venda2 = new Venda(new Comprador("Maria","11122233355","maria@gmail.com"));
@@ -75,7 +76,7 @@ public class VendaTeste implements ApplicationRunner {
         veiculos.add(motocicleta2);
         venda2.setVeiculos(veiculos);
 
-        new AppImpressao().relatorio(venda2,"Inclusão da venda 2 !!!");
+        VendaController.incluir(venda2);
 
         Venda venda3 = new Venda(new Comprador("Joao","11122233366","joao@gmail.com"));
         venda3.setDescricao(  "Venda 3");
@@ -93,6 +94,6 @@ public class VendaTeste implements ApplicationRunner {
         veiculos.add(caminhao3);
         venda3.setVeiculos(veiculos);
 
-        new AppImpressao().relatorio(venda3,"Inclusão da venda 3 !!!");
+        VendaController.incluir(venda3);
     }
 }

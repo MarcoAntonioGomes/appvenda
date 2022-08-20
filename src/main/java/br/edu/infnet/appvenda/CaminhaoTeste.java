@@ -1,7 +1,7 @@
 package br.edu.infnet.appvenda;
 
+import br.edu.infnet.appvenda.controller.CaminhaoController;
 import br.edu.infnet.appvenda.model.domain.Caminhao;
-import br.edu.infnet.appvenda.model.test.AppImpressao;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -20,9 +20,7 @@ public class CaminhaoTeste implements ApplicationRunner {
         caminhao1.setNome( "Vertis");
         caminhao1.setMarca( "Iveco");
         caminhao1.setValor(  200000);
-
-
-        new AppImpressao().relatorio(caminhao1, "Inclusão do caminhão Vertis!!!");
+        CaminhaoController.incluir(caminhao1);
 
 
         Caminhao caminhao2 = new Caminhao();
@@ -32,10 +30,7 @@ public class CaminhaoTeste implements ApplicationRunner {
         caminhao2.setNome( "45s14");
         caminhao2.setMarca( "Iveco");
         caminhao2.setValor(  100000);
-
-
-         new AppImpressao().relatorio(caminhao2, "Inclusão do caminhão 45s14!!!");
-
+        CaminhaoController.incluir(caminhao2);
 
         Caminhao caminhao3 = new Caminhao();
         caminhao3.setCapacidadeDeTransporte( 10000);
@@ -44,9 +39,8 @@ public class CaminhaoTeste implements ApplicationRunner {
         caminhao3.setNome( "1313");
         caminhao3.setMarca( "Volvo");
         caminhao3.setValor(  150000);
+        CaminhaoController.incluir(caminhao3);
 
-
-        new AppImpressao() .relatorio(caminhao3,"Inclusão do caminhão 1313!!!");
 
     }
 }

@@ -1,5 +1,6 @@
 package br.edu.infnet.appvenda;
 
+import br.edu.infnet.appvenda.controller.MotocicletaController;
 import br.edu.infnet.appvenda.model.domain.Motocicleta;
 import br.edu.infnet.appvenda.model.test.AppImpressao;
 import org.springframework.boot.ApplicationArguments;
@@ -19,9 +20,8 @@ public class MotocicletaTeste implements ApplicationRunner {
         motocicleta1.setNome( "CB300");
         motocicleta1.setMarca( "Honda");
         motocicleta1.setValor( 30000);
+        MotocicletaController.incluir(motocicleta1);
 
-
-       new AppImpressao().relatorio(motocicleta1, "Inclusão da motocicleta CB300!!!");
 
 
         Motocicleta motocicleta2 = new Motocicleta();
@@ -31,10 +31,7 @@ public class MotocicletaTeste implements ApplicationRunner {
         motocicleta2.setNome( "Z400");
         motocicleta2.setMarca( "Kawasaki");
         motocicleta2.setValor( 23000);
-
-
-       new AppImpressao().relatorio(motocicleta2, "Inclusão da motocicleta Z400!!!");
-
+        MotocicletaController.incluir(motocicleta2);
 
         Motocicleta motocicleta3 = new Motocicleta();
         motocicleta3.setPossuiCarenagem ( true);
@@ -43,9 +40,7 @@ public class MotocicletaTeste implements ApplicationRunner {
         motocicleta3.setNome( "CG Titan");
         motocicleta3.setMarca( "Honda");
         motocicleta3.setValor( 8000);
-
-
-        new AppImpressao().relatorio(motocicleta3, "Inclusão da motocicleta CG Titan!!!");
+        MotocicletaController.incluir(motocicleta3);
 
     }
 }

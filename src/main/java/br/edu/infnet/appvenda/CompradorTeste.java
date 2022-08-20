@@ -1,5 +1,6 @@
 package br.edu.infnet.appvenda;
 
+import br.edu.infnet.appvenda.controller.CompradorController;
 import br.edu.infnet.appvenda.model.domain.Comprador;
 import br.edu.infnet.appvenda.model.test.AppImpressao;
 import org.springframework.boot.ApplicationArguments;
@@ -14,12 +15,12 @@ public class CompradorTeste implements ApplicationRunner {
         System.out.println("#comprador");
 
         Comprador c1 = new Comprador("Maria da Silva", "12325642211", "maria@maria.com");
-        new AppImpressao().relatorio(c1,"Inclusão do comprador Maria !!!");
+        CompradorController.incluir(c1);
 
         Comprador c2 = new Comprador("Gilberto Braga", "12355533322", "gilberto@gil.com");
-        new AppImpressao().relatorio(c2,"Inclusão do comprador Gilberto Braga !!!");
+        CompradorController.incluir(c2);
 
         Comprador c3 = new Comprador("Tunico", "22233344455", "tunico@tunico.com");
-        new AppImpressao().relatorio(c3,"Inclusão do comprador Tunico !!!");
+        CompradorController.incluir(c3);
     }
 }
