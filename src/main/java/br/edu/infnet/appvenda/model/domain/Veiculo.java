@@ -2,6 +2,8 @@ package br.edu.infnet.appvenda.model.domain;
 
 import br.edu.infnet.appvenda.interfaces.IPrinter;
 
+import java.util.Objects;
+
 public abstract class Veiculo implements IPrinter {
 
     private String nome;
@@ -38,5 +40,19 @@ public abstract class Veiculo implements IPrinter {
     @Override
     public String toString() {
         return nome + ";" + valor + ";" + marca + calcularVenda();
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Veiculo)) return false;
+        Veiculo veiculo = (Veiculo) o;
+        return Float.compare(veiculo.valor, valor) == 0 && Objects.equals(nome, veiculo.nome) && Objects.equals(marca, veiculo.marca);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome, valor, marca);
     }
 }

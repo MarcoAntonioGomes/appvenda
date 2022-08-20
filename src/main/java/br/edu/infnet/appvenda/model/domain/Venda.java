@@ -4,6 +4,7 @@ import br.edu.infnet.appvenda.interfaces.IPrinter;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public class Venda implements IPrinter {
 
@@ -11,7 +12,7 @@ public class Venda implements IPrinter {
     private LocalDateTime data;
     private boolean avista;
     private Comprador comprador;
-    private List<Veiculo> veiculos;
+    private Set<Veiculo> veiculos;
 
     public Venda(Comprador comprador) {
         this.comprador = comprador;
@@ -36,11 +37,11 @@ public class Venda implements IPrinter {
     }
 
 
-    public List<Veiculo> getVeiculos() {
+    public Set<Veiculo> getVeiculos() {
         return veiculos;
     }
 
-    public void setVeiculos(List<Veiculo> veiculos) {
+    public void setVeiculos(Set<Veiculo> veiculos) {
         this.veiculos = veiculos;
     }
 

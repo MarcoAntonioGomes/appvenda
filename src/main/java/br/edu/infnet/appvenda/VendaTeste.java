@@ -8,7 +8,9 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Component
@@ -21,7 +23,7 @@ public class VendaTeste implements ApplicationRunner {
         Venda venda = new Venda(new Comprador("Jose","11122233344","jose@gmail.com"));
         venda.setDescricao("Venda 1");
         venda.setAvista(  true);
-        List<Veiculo> veiculos = new ArrayList<Veiculo>();
+        Set<Veiculo> veiculos = new HashSet<Veiculo>();
 
         Automovel automovel1 = new Automovel();
         automovel1.setPossuiAirbag(true);
@@ -31,7 +33,7 @@ public class VendaTeste implements ApplicationRunner {
         automovel1.setValor(30000);
         automovel1.setMarca("volkswagen");
         veiculos.add(automovel1);
-
+        veiculos.add(automovel1);
         venda.setVeiculos(veiculos);
 
         new AppImpressao().relatorio(venda,"Inclusão da venda 1 !!!");
@@ -49,7 +51,7 @@ public class VendaTeste implements ApplicationRunner {
         motocicleta2.setMarca( "Kawasaki");
         motocicleta2.setValor( 23000);
 
-        veiculos = new ArrayList<Veiculo>();
+        veiculos = new HashSet<Veiculo>();
         veiculos.add(motocicleta2);
         venda2.setVeiculos(veiculos);
 
@@ -67,7 +69,7 @@ public class VendaTeste implements ApplicationRunner {
         caminhao3.setMarca( "Volvo");
         caminhao3.setValor(  150000);
 
-        veiculos = new ArrayList<Veiculo>();
+        veiculos = new HashSet<Veiculo>();
         veiculos.add(caminhao3);
         venda3.setVeiculos(veiculos);
 
