@@ -9,6 +9,7 @@ public class Venda implements IPrinter {
     private String descricao;
     private LocalDateTime data;
     private boolean avista;
+    private Comprador comprador;
 
     public String getDescricao() {
         return descricao;
@@ -34,10 +35,17 @@ public class Venda implements IPrinter {
         this.avista = avista;
     }
 
+    public Comprador getComprador() {
+        return comprador;
+    }
+
+    public void setComprador(Comprador comprador) {
+        this.comprador = comprador;
+    }
 
     @Override
     public String toString() {
-        return descricao + ";" +data + ";" +avista;
+        return descricao + ";" +data + ";" +avista + ";" + comprador;
     }
 
     @Override
