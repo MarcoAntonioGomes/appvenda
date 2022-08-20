@@ -33,7 +33,28 @@ public class VendaTeste implements ApplicationRunner {
         automovel1.setValor(30000);
         automovel1.setMarca("volkswagen");
         veiculos.add(automovel1);
-        veiculos.add(automovel1);
+
+        Motocicleta motocicleta = new Motocicleta();
+        motocicleta.setPossuiCarenagem ( false);
+        motocicleta.setNumeroDeMarchas ( 5);
+        motocicleta.setCilindrada( 400);
+        motocicleta.setNome( "Z400");
+        motocicleta.setMarca( "Kawasaki");
+        motocicleta.setValor( 23000);
+
+        veiculos.add(motocicleta);
+
+
+        Caminhao caminhao2 = new Caminhao();
+        caminhao2.setCapacidadeDeTransporte( 9000);
+        caminhao2.setTipoCarroceria( "Plataforma");
+        caminhao2.setTorque( 300);
+        caminhao2.setNome( "45s14");
+        caminhao2.setMarca( "Iveco");
+        caminhao2.setValor(  100000);
+
+        veiculos.add(caminhao2);
+
         venda.setVeiculos(veiculos);
 
         new AppImpressao().relatorio(venda,"Inclusão da venda 1 !!!");
