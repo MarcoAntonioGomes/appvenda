@@ -11,6 +11,10 @@ public class Venda implements IPrinter {
     private boolean avista;
     private Comprador comprador;
 
+    public Venda(String nome, String cpf, String email) {
+        this.comprador = new Comprador( nome, cpf, email);
+    }
+
     public String getDescricao() {
         return descricao;
     }
@@ -35,13 +39,6 @@ public class Venda implements IPrinter {
         this.avista = avista;
     }
 
-    public Comprador getComprador() {
-        return comprador;
-    }
-
-    public void setComprador(Comprador comprador) {
-        this.comprador = comprador;
-    }
 
     @Override
     public String toString() {
