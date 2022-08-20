@@ -11,8 +11,9 @@ public class Venda implements IPrinter {
     private boolean avista;
     private Comprador comprador;
 
-    public Venda(String nome, String cpf, String email) {
-        this.comprador = new Comprador( nome, cpf, email);
+    public Venda(Comprador comprador) {
+        this.comprador = comprador;
+        this.data =  LocalDateTime.now();
     }
 
     public String getDescricao() {
@@ -23,13 +24,6 @@ public class Venda implements IPrinter {
         this.descricao = descricao;
     }
 
-    public LocalDateTime getData() {
-        return data;
-    }
-
-    public void setData(LocalDateTime data) {
-        this.data = data;
-    }
 
     public boolean isAvista() {
         return avista;
