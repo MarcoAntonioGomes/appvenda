@@ -6,6 +6,7 @@ import br.edu.infnet.appvenda.model.test.AppImpressao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.*;
 
@@ -24,6 +25,19 @@ public class CompradorController {
         new AppImpressao().relatorio(comprador,"Inclusão do comprador " + comprador.getNome() + "realizada com sucesso!!!");
 
     }
+
+    @GetMapping(value = "/comprador/{id}/excluir")
+    public String exclusao(@PathVariable Integer id){
+
+        excluir(id);
+        return "redirect:/comprador/lista";
+    }
+
+
+    public static void excluir(Integer id){
+        mapaComprador.remove(id);
+    }
+
 
     public static Collection<Comprador> obterLista(){
         return mapaComprador.values();

@@ -49,6 +49,7 @@
             <th>Descrição</th>
             <th>Data</th>
             <th>A vista</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -58,6 +59,7 @@
                 <td>${v.descricao}</td>
                 <td>${v.data}</td>
                 <td>${v.avista}</td>
+                <td><a href="/venda/${v.id}/excluir">excluir</a></td>
             </tr>
         </c:forEach>
         </tbody>

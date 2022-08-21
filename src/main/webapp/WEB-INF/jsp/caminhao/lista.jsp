@@ -54,6 +54,7 @@
             <th>Capacidade de Transporte</th>
             <th>Tipo de Carroceria</th>
             <th>Torque</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -67,6 +68,7 @@
             <td>${c.capacidadeDeTransporte}</td>
             <td>${c.tipoCarroceria}</td>
             <td>${c.torque}</td>
+            <td><a href="/caminhao/${c.id}/excluir">excluir</a></td>
         </tr>
         </c:forEach>
         </tbody>

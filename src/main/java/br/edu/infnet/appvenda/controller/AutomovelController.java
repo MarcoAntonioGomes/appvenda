@@ -5,6 +5,7 @@ import br.edu.infnet.appvenda.model.test.AppImpressao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 import java.util.Collection;
@@ -23,6 +24,18 @@ public class AutomovelController {
         mapaAutomovel.put(automovel.getId(),automovel);
 
         new AppImpressao().relatorio(automovel,"Inclusão do Automovel " + automovel.getNome() + " realizada com sucesso!!!");
+    }
+
+    @GetMapping(value = "/automovel/{id}/excluir")
+    public String exclusao(@PathVariable Integer id){
+
+        excluir(id);
+        return "redirect:/automovel/lista";
+    }
+
+
+    public static void excluir(Integer id){
+        mapaAutomovel.remove(id);
     }
 
     public static Collection<Automovel> obterLista(){

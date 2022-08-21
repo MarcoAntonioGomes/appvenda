@@ -54,6 +54,7 @@
             <th>Cilindrada</th>
             <th>Possui Carenagem</th>
             <th>Número de Marchas</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -67,6 +68,7 @@
                 <td>${m.cilindrada}</td>
                 <td>${m.possuiCarenagem}</td>
                 <td>${m.numeroDeMarchas}</td>
+                <td><a href="/motocicleta/${m.id}/excluir">excluir</a></td>
             </tr>
         </c:forEach>
         </tbody>

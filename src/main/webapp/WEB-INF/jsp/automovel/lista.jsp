@@ -54,6 +54,7 @@
             <th>Quantidade de Portas</th>
             <th>Tipo</th>
             <th>Possui Airbag</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -66,6 +67,7 @@
             <td>${a.quantidadeDePortas}</td>
             <td>${a.tipo}</td>
             <td>${a.possuiAirbag}</td>
+            <td><a href="/automovel/${a.id}/excluir">excluir</a></td>
         </tr>
        </c:forEach>
         </tbody>
