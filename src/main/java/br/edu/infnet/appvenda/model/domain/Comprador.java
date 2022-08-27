@@ -11,10 +11,18 @@ public class Comprador implements IPrinter {
 
 
 
-    public Comprador(String nome, String cpf, String email) {
+    public Comprador(String nome, String cpf, String email) throws Exception {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
+
+        if(cpf == null){
+            throw new Exception("Não é possível aceitar CPF nulo");
+        }
+        if(cpf.isEmpty()){
+            throw new Exception("Não é possível aceitar CPF sem preenchimento");
+        }
+
     }
 
     public String getNome() {

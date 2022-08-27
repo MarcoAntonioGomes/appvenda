@@ -20,7 +20,12 @@ public class VendaTeste implements ApplicationRunner {
     public void run(ApplicationArguments args)  {
 
         System.out.println("#venda");
-        Venda venda = new Venda(new Comprador("Jose","11122233344","jose@gmail.com"));
+        Venda venda = null;
+        try {
+            venda = new Venda(new Comprador("Jose","11122233344","jose@gmail.com"));
+        } catch (Exception e) {
+            System.out.println("[ERROR] " + e.getMessage());
+        }
         venda.setDescricao("Venda 1");
         venda.setAvista(  true);
         Set<Veiculo> veiculos = new HashSet<Veiculo>();
@@ -60,7 +65,12 @@ public class VendaTeste implements ApplicationRunner {
         VendaController.incluir(venda);
 
 
-        Venda venda2 = new Venda(new Comprador("Maria","11122233355","maria@gmail.com"));
+        Venda venda2 = null;
+        try {
+            venda2 = new Venda(new Comprador("Maria","11122233355","maria@gmail.com"));
+        } catch (Exception e) {
+            System.out.println("[ERROR] " + e.getMessage());
+        }
         venda2.setDescricao(  "Venda 2");
         venda2.setAvista(  false);
 
@@ -78,7 +88,12 @@ public class VendaTeste implements ApplicationRunner {
 
         VendaController.incluir(venda2);
 
-        Venda venda3 = new Venda(new Comprador("Joao","11122233366","joao@gmail.com"));
+        Venda venda3 = null;
+        try {
+            venda3 = new Venda(new Comprador("Joao","11122233366","joao@gmail.com"));
+        } catch (Exception e) {
+            System.out.println("[ERROR] " + e.getMessage());
+        }
         venda3.setDescricao(  "Venda 3");
         venda3.setAvista(  true);
 
