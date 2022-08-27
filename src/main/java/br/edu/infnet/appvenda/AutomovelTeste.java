@@ -7,6 +7,12 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
+
 @Component
 public class AutomovelTeste implements ApplicationRunner {
 
@@ -15,97 +21,58 @@ public class AutomovelTeste implements ApplicationRunner {
 
         System.out.println("#automovel");
 
-        try {
-            Automovel automovel1 = new Automovel();
-            automovel1.setPossuiAirbag(true);
-            automovel1.setQuantidadeDePortas(4);
-            automovel1.setTipo("Carro comum");
-            automovel1.setNome("Gol");
-            automovel1.setValor(30000);
-            automovel1.setMarca("volkswagen");
-            System.out.println("Cálculo de venda: "+automovel1.calcularVenda());
-            AutomovelController.incluir(automovel1);
-        } catch (QuantidadePortasInvalidoException e) {
-            System.out.println("[ERROR - Automovel] " + e.getMessage());
-        }
 
 
-
+        String dir = "C:/Users/marco/Desktop/POS-PROJETOS/appvenda/src/main/resources/files/";
+        String arq = "automoveis.txt";
 
         try {
-            Automovel automovel2 = new Automovel();
-            automovel2.setPossuiAirbag(false);
-            automovel2.setQuantidadeDePortas(2);
-            automovel2.setTipo("Caminhonete");
-            automovel2.setNome("Strada");
-            automovel2.setValor(50000);
-            automovel2.setMarca("Fiat");
-            System.out.println("Cálculo de venda: "+automovel2.calcularVenda());
-            AutomovelController.incluir(automovel2);
-        } catch (QuantidadePortasInvalidoException e) {
-            System.out.println("[ERROR - Automovel] " + e.getMessage());
-        }
+            try {
+                FileReader fileReader = new FileReader(dir + arq);
+                BufferedReader leitura = new BufferedReader(fileReader);
+
+                String linha = leitura.readLine();
+
+                while (linha != null){
+
+                    List<String> campos = List.of(linha.split(";"));
+
+                    try {
+                        Automovel automovel1 = new Automovel();
+                        automovel1.setPossuiAirbag(Boolean.valueOf(campos.get(4)));
+                        automovel1.setQuantidadeDePortas(Integer.valueOf(campos.get(5)));
+                        automovel1.setTipo(campos.get(0));
+                        automovel1.setNome(campos.get(1));
+                        automovel1.setValor(Float.parseFloat(campos.get(2)));
+                        automovel1.setMarca(campos.get(3));
+                        System.out.println("Cálculo de venda: "+automovel1.calcularVenda());
+                        AutomovelController.incluir(automovel1);
+                    } catch (QuantidadePortasInvalidoException e) {
+                        System.out.println("[ERROR - Automovel] " + e.getMessage());
+                    }
 
 
+                    linha = leitura.readLine();
+                }
 
 
-
-        try {
-            Automovel automovel3 = new Automovel();
-            automovel3.setPossuiAirbag(true);
-            automovel3.setQuantidadeDePortas(4);
-            automovel3.setTipo("Esportivo");
-            automovel3.setNome( "A4");
-            automovel3.setValor(400000);
-            automovel3.setMarca("Audi");
-            System.out.println("Cálculo de venda: "+automovel3.calcularVenda());
-            AutomovelController.incluir(automovel3);
-        } catch (QuantidadePortasInvalidoException e) {
-            System.out.println("[ERROR - Automovel] " + e.getMessage());
-        }
+                leitura.close();
+                fileReader.close();
+            } catch (FileNotFoundException e) {
+                System.out.println("[ERRO] O arquivo não existe!!!");
+            } catch (IOException e) {
+                System.out.println("[ERRO] Problema no fechamento do arquivo!!!");
+            }
 
 
-        try {
-            Automovel automovel4 = new Automovel();
-            automovel4.setPossuiAirbag(true);
-            automovel4.setQuantidadeDePortas(0);
-            automovel4.setTipo("Esportivo");
-            automovel4.setNome( "A4");
-            automovel4.setValor(400000);
-            automovel4.setMarca("Audi");
-            System.out.println("Cálculo de venda: "+automovel4.calcularVenda());
-            AutomovelController.incluir(automovel4);
-        } catch (QuantidadePortasInvalidoException e) {
-            System.out.println("[ERROR - Automovel] " + e.getMessage());
-        }
-
-        try {
-            Automovel automovel5 = new Automovel();
-            automovel5.setPossuiAirbag(true);
-            automovel5.setQuantidadeDePortas(1);
-            automovel5.setTipo("Esportivo");
-            automovel5.setNome( "A4");
-            automovel5.setValor(400000);
-            automovel5.setMarca("Audi");
-            System.out.println("Cálculo de venda: "+automovel5.calcularVenda());
-            AutomovelController.incluir(automovel5);
-        } catch (QuantidadePortasInvalidoException e) {
-            System.out.println("[ERROR - Automovel] " + e.getMessage());
-        }
-
-        try {
-            Automovel automovel6 = new Automovel();
-            automovel6.setPossuiAirbag(true);
-            automovel6.setQuantidadeDePortas(10);
-            automovel6.setTipo("Esportivo");
-            automovel6.setNome( "A4");
-            automovel6.setValor(400000);
-            automovel6.setMarca("Audi");
-            System.out.println("Cálculo de venda: "+automovel6.calcularVenda());
-            AutomovelController.incluir(automovel6);
-        } catch (QuantidadePortasInvalidoException e) {
-            System.out.println("[ERROR - Automovel] " + e.getMessage());
+        } finally {
+            System.out.println("Terminou!!!");
         }
 
     }
+
+
+
+
+
 }

@@ -11,7 +11,12 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -57,98 +62,48 @@ public class VendaTeste implements ApplicationRunner {
         veiculos.add(caminhao2);
 
 
-        try {
-            Venda venda  = new Venda(new Comprador("Jose","11122233344","jose@gmail.com"), veiculos);
-            venda.setDescricao("Venda 1");
-            venda.setAvista(  true);
-            VendaController.incluir(venda);
-
-        } catch (CpfInvalidoException | CompradorNuloException | VendaSemVeiculosException e) {
-            System.out.println("[ERROR - VENDA] " + e.getMessage());
-        }
 
 
-        Motocicleta motocicleta2 = new Motocicleta();
-        motocicleta2.setPossuiCarenagem ( false);
-        motocicleta2.setNumeroDeMarchas ( 5);
-        motocicleta2.setCilindrada( 400);
-        motocicleta2.setNome( "Z400");
-        motocicleta2.setMarca( "Kawasaki");
-        motocicleta2.setValor( 23000);
-
-        veiculos = new HashSet<Veiculo>();
-        veiculos.add(motocicleta2);
-
+        String dir = "C:/Users/marco/Desktop/POS-PROJETOS/appvenda/src/main/resources/files/";
+        String arq = "vendas.txt";
 
         try {
-            Venda venda2  = new Venda(new Comprador("Maria","11122233355","maria@gmail.com"),veiculos);
-            venda2.setDescricao(  "Venda 2");
-            venda2.setAvista(  false);
-            VendaController.incluir(venda2);
+            try {
+                FileReader fileReader = new FileReader(dir + arq);
+                BufferedReader leitura = new BufferedReader(fileReader);
 
-        }  catch (CpfInvalidoException | CompradorNuloException | VendaSemVeiculosException e) {
-            System.out.println("[ERROR - VENDA] " + e.getMessage());
+                String linha = leitura.readLine();
+
+                while (linha != null){
+
+                    List<String> campos = List.of(linha.split(";"));
+
+                    try {
+                        Venda venda  = new Venda(new Comprador(campos.get(1),campos.get(2),campos.get(3)), veiculos);
+                        venda.setDescricao(campos.get(0));
+                        venda.setAvista(  Boolean.valueOf(campos.get(4)));
+                        VendaController.incluir(venda);
+
+                    } catch (CpfInvalidoException | CompradorNuloException | VendaSemVeiculosException e) {
+                        System.out.println("[ERROR - VENDA] " + e.getMessage());
+                    }
+
+                    linha = leitura.readLine();
+                }
+
+
+                leitura.close();
+                fileReader.close();
+            } catch (FileNotFoundException e) {
+                System.out.println("[ERRO] O arquivo não existe!!!");
+            } catch (IOException e) {
+                System.out.println("[ERRO] Problema no fechamento do arquivo!!!");
+            }
+
+
+        } finally {
+            System.out.println("Terminou!!!");
         }
-
-        Caminhao caminhao3 = new Caminhao();
-        caminhao3.setCapacidadeDeTransporte( 10000);
-        caminhao3.setTipoCarroceria( "Prancha");
-        caminhao3.setTorque( 400);
-        caminhao3.setNome( "1313");
-        caminhao3.setMarca( "Volvo");
-        caminhao3.setValor(  150000);
-
-
-        veiculos = new HashSet<Veiculo>();
-        veiculos.add(caminhao3);
-
-
-
-        try {
-            Venda venda3  = new Venda(new Comprador("Joao","11122233366","joao@gmail.com"), veiculos);
-            venda3.setDescricao(  "Venda 3");
-            venda3.setAvista(  true);
-            VendaController.incluir(venda3);
-        } catch (CpfInvalidoException | CompradorNuloException | VendaSemVeiculosException e) {
-            System.out.println("[ERROR - VENDA] " + e.getMessage());
-        }
-
-
-        try {
-            Comprador comprador = new Comprador("Joao","11122233366","joao@gmail.com");
-
-            Venda venda4 = new Venda(null, veiculos);
-            venda4.setDescricao(  "Venda 3");
-            venda4.setAvista(  true);
-            VendaController.incluir(venda4);
-        } catch (CpfInvalidoException | CompradorNuloException | VendaSemVeiculosException e) {
-            System.out.println("[ERROR - VENDA] " + e.getMessage());
-        }
-
-        try {
-            Comprador comprador = new Comprador("Joao","11122233366","joao@gmail.com");
-
-            veiculos = new HashSet<>();
-            Venda venda4 = new Venda(comprador, veiculos );
-            venda4.setDescricao(  "Venda 4");
-            venda4.setAvista(  true);
-            VendaController.incluir(venda4);
-        } catch (CpfInvalidoException | CompradorNuloException | VendaSemVeiculosException e) {
-            System.out.println("[ERROR - VENDA] " + e.getMessage());
-        }
-
-        try {
-            Comprador comprador = new Comprador("Joao","11122233366","joao@gmail.com");
-
-            veiculos = new HashSet<>();
-            Venda venda5 = new Venda(comprador, null );
-            venda5.setDescricao(  "Venda 5");
-            venda5.setAvista(  true);
-            VendaController.incluir(venda5);
-        } catch (CpfInvalidoException | CompradorNuloException | VendaSemVeiculosException e) {
-            System.out.println("[ERROR - VENDA] " + e.getMessage());
-        }
-
 
     }
 }

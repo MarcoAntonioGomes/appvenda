@@ -1,12 +1,21 @@
 package br.edu.infnet.appvenda;
 
+import br.edu.infnet.appvenda.controller.AutomovelController;
 import br.edu.infnet.appvenda.controller.MotocicletaController;
 import br.edu.infnet.appvenda.exceptions.NumeroCilindradasInvalidaException;
+import br.edu.infnet.appvenda.exceptions.QuantidadePortasInvalidoException;
+import br.edu.infnet.appvenda.model.domain.Automovel;
 import br.edu.infnet.appvenda.model.domain.Motocicleta;
 import br.edu.infnet.appvenda.model.test.AppImpressao;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
 
 @Component
 public class MotocicletaTeste implements ApplicationRunner {
@@ -15,67 +24,55 @@ public class MotocicletaTeste implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         System.out.println("#motocicleta");
 
+        String dir = "C:/Users/marco/Desktop/POS-PROJETOS/appvenda/src/main/resources/files/";
+        String arq = "motocicletas.txt";
+
+
         try {
-            Motocicleta motocicleta1 = new Motocicleta();
-            motocicleta1.setPossuiCarenagem ( true);
-            motocicleta1.setNumeroDeMarchas ( 4);
-            motocicleta1.setCilindrada( 300);
-            motocicleta1.setNome( "CB300");
-            motocicleta1.setMarca( "Honda");
-            motocicleta1.setValor( 30000);
-            System.out.println("Cálculo de venda: "+motocicleta1.calcularVenda());
-            MotocicletaController.incluir(motocicleta1);
-        } catch (NumeroCilindradasInvalidaException e) {
-            System.out.println("[ERROR - Motocicleta] " + e.getMessage());
+            try {
+                FileReader fileReader = new FileReader(dir + arq);
+                BufferedReader leitura = new BufferedReader(fileReader);
+
+                String linha = leitura.readLine();
+
+                while (linha != null){
+
+                    List<String> campos = List.of(linha.split(";"));
+
+                    try {
+                        Motocicleta motocicleta1 = new Motocicleta();
+                        motocicleta1.setPossuiCarenagem ( Boolean.valueOf(campos.get(0)));
+                        motocicleta1.setNumeroDeMarchas ( Integer.valueOf(campos.get(1)));
+                        motocicleta1.setCilindrada( Integer.valueOf(campos.get(2)));
+                        motocicleta1.setNome(campos.get(3));
+                        motocicleta1.setMarca( campos.get(4));
+                        motocicleta1.setValor( Float.valueOf(campos.get(5)));
+                        System.out.println("Cálculo de venda: "+motocicleta1.calcularVenda());
+                        MotocicletaController.incluir(motocicleta1);
+                    } catch (NumeroCilindradasInvalidaException e) {
+                        System.out.println("[ERROR - Motocicleta] " + e.getMessage());
+                    }
+
+
+                    linha = leitura.readLine();
+                }
+
+
+                leitura.close();
+                fileReader.close();
+            } catch (FileNotFoundException e) {
+                System.out.println("[ERRO] O arquivo não existe!!!");
+            } catch (IOException e) {
+                System.out.println("[ERRO] Problema no fechamento do arquivo!!!");
+            }
+
+
+        } finally {
+            System.out.println("Terminou!!!");
         }
 
 
 
-
-
-        try {
-            Motocicleta motocicleta2 = new Motocicleta();
-            motocicleta2.setPossuiCarenagem ( false);
-            motocicleta2.setNumeroDeMarchas ( 5);
-            motocicleta2.setCilindrada( 400);
-            motocicleta2.setNome( "Z400");
-            motocicleta2.setMarca( "Kawasaki");
-            motocicleta2.setValor( 23000);
-            System.out.println("Cálculo de venda: "+motocicleta2.calcularVenda());
-            MotocicletaController.incluir(motocicleta2);
-        } catch (NumeroCilindradasInvalidaException e) {
-            System.out.println("[ERROR - Motocicleta] " + e.getMessage());
-        }
-
-
-
-        try {
-            Motocicleta motocicleta3 = new Motocicleta();
-            motocicleta3.setPossuiCarenagem ( true);
-            motocicleta3.setNumeroDeMarchas ( 4);
-            motocicleta3.setCilindrada( 150);
-            motocicleta3.setNome( "CG Titan");
-            motocicleta3.setMarca( "Honda");
-            motocicleta3.setValor( 8000);
-            System.out.println("Cálculo de venda: "+motocicleta3.calcularVenda());
-            MotocicletaController.incluir(motocicleta3);
-        } catch (NumeroCilindradasInvalidaException e) {
-            System.out.println("[ERROR - Motocicleta] " + e.getMessage());
-        }
-
-        try {
-            Motocicleta motocicleta4 = new Motocicleta();
-            motocicleta4.setPossuiCarenagem ( true);
-            motocicleta4.setNumeroDeMarchas ( 4);
-            motocicleta4.setCilindrada( 10);
-            motocicleta4.setNome( "CG Titan");
-            motocicleta4.setMarca( "Honda");
-            motocicleta4.setValor( 8000);
-            System.out.println("Cálculo de venda: "+motocicleta4.calcularVenda());
-            MotocicletaController.incluir(motocicleta4);
-        } catch (NumeroCilindradasInvalidaException e) {
-            System.out.println("[ERROR - Motocicleta] " + e.getMessage());
-        }
 
     }
 }

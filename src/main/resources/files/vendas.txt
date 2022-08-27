@@ -1,0 +1,3 @@
+Venda 1;Jose;11122233344;jose@gmail.com;true
+Venda 2;Maria;11122233355;maria@gmail.com;false
+Venda 3;Joao;11122233366;joao@gmail.com;true

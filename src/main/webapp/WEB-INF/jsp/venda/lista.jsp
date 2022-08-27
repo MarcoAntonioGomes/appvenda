@@ -49,6 +49,8 @@
             <th>Descrição</th>
             <th>Data</th>
             <th>A vista</th>
+            <th>Comprador</th>
+            <th>Veículos</th>
             <th></th>
         </tr>
         </thead>
@@ -59,6 +61,8 @@
                 <td>${v.descricao}</td>
                 <td>${v.data}</td>
                 <td>${v.avista}</td>
+                <td>${v.comprador.nome}</td>
+                <td>${v.veiculos.size()}</td>
                 <td><a href="/venda/${v.id}/excluir">excluir</a></td>
             </tr>
         </c:forEach>

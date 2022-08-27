@@ -1,11 +1,20 @@
 package br.edu.infnet.appvenda;
 
+import br.edu.infnet.appvenda.controller.AutomovelController;
 import br.edu.infnet.appvenda.controller.CompradorController;
 import br.edu.infnet.appvenda.exceptions.CpfInvalidoException;
+import br.edu.infnet.appvenda.exceptions.QuantidadePortasInvalidoException;
+import br.edu.infnet.appvenda.model.domain.Automovel;
 import br.edu.infnet.appvenda.model.domain.Comprador;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
 
 @Component
 public class CompradorTeste implements ApplicationRunner {
@@ -15,45 +24,48 @@ public class CompradorTeste implements ApplicationRunner {
         System.out.println("#comprador");
 
 
-        try {
-            Comprador c1 = new Comprador("Maria da Silva", "12325642211", "maria@maria.com");
-            CompradorController.incluir(c1);
-        } catch (CpfInvalidoException e) {
-           System.out.println("[ERROR] " + e.getMessage());
-        }
 
 
+
+        String dir = "C:/Users/marco/Desktop/POS-PROJETOS/appvenda/src/main/resources/files/";
+        String arq = "compradores.txt";
 
         try {
-            Comprador c2 = new Comprador("Gilberto Braga", "12355533322", "gilberto@gil.com");
-            CompradorController.incluir(c2);
-        } catch (CpfInvalidoException e) {
-            System.out.println("[ERROR] " + e.getMessage());
+            try {
+                FileReader fileReader = new FileReader(dir + arq);
+                BufferedReader leitura = new BufferedReader(fileReader);
+
+                String linha = leitura.readLine();
+
+                while (linha != null){
+
+                    List<String> campos = List.of(linha.split(";"));
+
+                    try {
+                        Comprador c1 = new Comprador(campos.get(0), campos.get(1), campos.get(2));
+                        CompradorController.incluir(c1);
+                    } catch (CpfInvalidoException e) {
+                        System.out.println("[ERROR] " + e.getMessage());
+                    }
+
+
+                    linha = leitura.readLine();
+                }
+
+
+                leitura.close();
+                fileReader.close();
+            } catch (FileNotFoundException e) {
+                System.out.println("[ERRO] O arquivo não existe!!!");
+            } catch (IOException e) {
+                System.out.println("[ERRO] Problema no fechamento do arquivo!!!");
+            }
+
+
+        } finally {
+            System.out.println("Terminou!!!");
         }
 
-
-        try {
-            Comprador c3  = new Comprador("Tunico", "22233344455", "tunico@tunico.com");
-            CompradorController.incluir(c3);
-        } catch (CpfInvalidoException e) {
-            System.out.println("[ERROR] " + e.getMessage());
-        }
-
-
-        try {
-            Comprador c4 = new Comprador("Braga", null, "braga@braga.com");
-            CompradorController.incluir(c4);
-        } catch (CpfInvalidoException e) {
-            System.out.println("[ERROR] " + e.getMessage());
-        }
-
-
-        try {
-            Comprador c5 = new Comprador("Jose", "", "jose@jose.com");
-            CompradorController.incluir(c5);
-        } catch (CpfInvalidoException e) {
-            System.out.println("[ERROR] " + e.getMessage());
-        }
 
 
     }
