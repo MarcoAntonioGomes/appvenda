@@ -1,5 +1,7 @@
 package br.edu.infnet.appvenda.model.domain;
 
+import br.edu.infnet.appvenda.exceptions.NumeroCilindradasInvalidaException;
+
 public class Motocicleta extends Veiculo{
 
     private int cilindrada;
@@ -13,8 +15,13 @@ public class Motocicleta extends Veiculo{
     }
 
     @Override
-    public float calcularVenda() {
+    public float calcularVenda() throws NumeroCilindradasInvalidaException {
         System.out.println("Calcular venda motocicleta");
+
+        if(cilindrada < 50){
+            throw new NumeroCilindradasInvalidaException("O número de cilindradas não pode ser menor que 50");
+        }
+
         float valorCarenagem = possuiCarenagem ? 500 : 100;
         float valorCilindrada = cilindrada * 0.045f;
         return getValor() * 2 + valorCarenagem + valorCilindrada;

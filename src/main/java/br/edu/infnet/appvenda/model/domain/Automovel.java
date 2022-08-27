@@ -1,5 +1,7 @@
 package br.edu.infnet.appvenda.model.domain;
 
+import br.edu.infnet.appvenda.exceptions.QuantidadePortasInvalidoException;
+
 public class Automovel extends Veiculo{
 
     private int quantidadeDePortas;
@@ -37,7 +39,13 @@ public class Automovel extends Veiculo{
     }
 
     @Override
-    public float calcularVenda() {
+    public float calcularVenda() throws QuantidadePortasInvalidoException {
+
+        if(quantidadeDePortas == 0 || quantidadeDePortas == 1 || quantidadeDePortas > 4){
+            throw new QuantidadePortasInvalidoException("A quantidade de portas do carro não pode ser " + quantidadeDePortas + ". Utilize 2, 3 ou 4 ");
+        }
+
+
         float valorPorQuantidadeDePortas = quantidadeDePortas == 4 ? 1000 : 500;
         float valorPorPossuirAirbag = possuiAirbag ? 2000 : 0;
         return getValor() * 2 + valorPorQuantidadeDePortas + valorPorPossuirAirbag;

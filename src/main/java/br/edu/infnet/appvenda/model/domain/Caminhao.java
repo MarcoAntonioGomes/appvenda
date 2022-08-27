@@ -1,5 +1,7 @@
 package br.edu.infnet.appvenda.model.domain;
 
+import br.edu.infnet.appvenda.exceptions.CapacidadeTransporteInvalidaException;
+
 public class Caminhao  extends Veiculo{
 
     private float capacidadeDeTransporte;
@@ -14,7 +16,11 @@ public class Caminhao  extends Veiculo{
     }
 
     @Override
-    public float calcularVenda() {
+    public float calcularVenda() throws CapacidadeTransporteInvalidaException {
+
+        if(capacidadeDeTransporte < 1000){
+            throw new CapacidadeTransporteInvalidaException("A capacidade de transporte do caminhão não pode ser menor que 1000");
+        }
 
         float valorPorCapacidadeDeTransporte = capacidadeDeTransporte*0.005f;
         return getValor() + valorPorCapacidadeDeTransporte;

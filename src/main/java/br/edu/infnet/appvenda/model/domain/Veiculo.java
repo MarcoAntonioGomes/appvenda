@@ -1,5 +1,8 @@
 package br.edu.infnet.appvenda.model.domain;
 
+import br.edu.infnet.appvenda.exceptions.CapacidadeTransporteInvalidaException;
+import br.edu.infnet.appvenda.exceptions.NumeroCilindradasInvalidaException;
+import br.edu.infnet.appvenda.exceptions.QuantidadePortasInvalidoException;
 import br.edu.infnet.appvenda.interfaces.IPrinter;
 
 import java.util.Objects;
@@ -12,7 +15,7 @@ public abstract class Veiculo implements IPrinter {
     private  String marca;
 
 
-    public abstract float calcularVenda();
+    public abstract float calcularVenda() throws NumeroCilindradasInvalidaException, QuantidadePortasInvalidoException, CapacidadeTransporteInvalidaException;
 
     public String getNome() {
         return nome;
