@@ -20,6 +20,7 @@ public class MotocicletaTeste implements ApplicationRunner {
         motocicleta1.setNome( "CB300");
         motocicleta1.setMarca( "Honda");
         motocicleta1.setValor( 30000);
+        System.out.println("Cálculo de venda: "+motocicleta1.calcularVenda());
         MotocicletaController.incluir(motocicleta1);
 
 
@@ -31,6 +32,7 @@ public class MotocicletaTeste implements ApplicationRunner {
         motocicleta2.setNome( "Z400");
         motocicleta2.setMarca( "Kawasaki");
         motocicleta2.setValor( 23000);
+        System.out.println("Cálculo de venda: "+motocicleta2.calcularVenda());
         MotocicletaController.incluir(motocicleta2);
 
         Motocicleta motocicleta3 = new Motocicleta();
@@ -40,6 +42,7 @@ public class MotocicletaTeste implements ApplicationRunner {
         motocicleta3.setNome( "CG Titan");
         motocicleta3.setMarca( "Honda");
         motocicleta3.setValor( 8000);
+        System.out.println("Cálculo de venda: "+motocicleta3.calcularVenda());
         MotocicletaController.incluir(motocicleta3);
 
     }

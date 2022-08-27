@@ -20,6 +20,7 @@ public class CaminhaoTeste implements ApplicationRunner {
         caminhao1.setNome( "Vertis");
         caminhao1.setMarca( "Iveco");
         caminhao1.setValor(  200000);
+        System.out.println("Cálculo de venda: "+caminhao1.calcularVenda());
         CaminhaoController.incluir(caminhao1);
 
 
@@ -30,6 +31,7 @@ public class CaminhaoTeste implements ApplicationRunner {
         caminhao2.setNome( "45s14");
         caminhao2.setMarca( "Iveco");
         caminhao2.setValor(  100000);
+        System.out.println("Cálculo de venda: "+caminhao2.calcularVenda());
         CaminhaoController.incluir(caminhao2);
 
         Caminhao caminhao3 = new Caminhao();
@@ -39,6 +41,7 @@ public class CaminhaoTeste implements ApplicationRunner {
         caminhao3.setNome( "1313");
         caminhao3.setMarca( "Volvo");
         caminhao3.setValor(  150000);
+        System.out.println("Cálculo de venda: "+caminhao3.calcularVenda());
         CaminhaoController.incluir(caminhao3);
 
 

@@ -48,7 +48,7 @@ public abstract class Veiculo implements IPrinter {
 
     @Override
     public String toString() {
-        return nome + ";" + valor + ";" + marca + calcularVenda();
+        return nome + ";" + valor + ";" + marca;
     }
 
 

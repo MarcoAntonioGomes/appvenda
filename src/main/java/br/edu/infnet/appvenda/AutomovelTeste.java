@@ -20,6 +20,7 @@ public class AutomovelTeste implements ApplicationRunner {
         automovel1.setNome("Gol");
         automovel1.setValor(30000);
         automovel1.setMarca("volkswagen");
+        System.out.println("Cálculo de venda: "+automovel1.calcularVenda());
         AutomovelController.incluir(automovel1);
 
 
@@ -30,6 +31,7 @@ public class AutomovelTeste implements ApplicationRunner {
         automovel2.setNome("Strada");
         automovel2.setValor(50000);
         automovel2.setMarca("Fiat");
+        System.out.println("Cálculo de venda: "+automovel2.calcularVenda());
         AutomovelController.incluir(automovel2);
 
 
@@ -41,6 +43,7 @@ public class AutomovelTeste implements ApplicationRunner {
         automovel3.setNome( "A4");
         automovel3.setValor(400000);
         automovel3.setMarca("Audi");
+        System.out.println("Cálculo de venda: "+automovel3.calcularVenda());
         AutomovelController.incluir(automovel3);
 
 
