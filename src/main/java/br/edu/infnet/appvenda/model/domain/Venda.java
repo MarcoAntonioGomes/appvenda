@@ -1,5 +1,7 @@
 package br.edu.infnet.appvenda.model.domain;
 
+import br.edu.infnet.appvenda.exceptions.CompradorNuloException;
+import br.edu.infnet.appvenda.exceptions.VendaSemVeiculosException;
 import br.edu.infnet.appvenda.interfaces.IPrinter;
 
 import java.time.LocalDateTime;
@@ -14,9 +16,24 @@ public class Venda implements IPrinter {
     private Comprador comprador;
     private Set<Veiculo> veiculos;
 
-    public Venda(Comprador comprador) {
+    public Venda(Comprador comprador, Set<Veiculo> veiculos) throws CompradorNuloException, VendaSemVeiculosException {
+
+       if(comprador == null){
+           throw new CompradorNuloException("Impossivel criar um pedido sem um solicitante");
+       }
+
+        if(veiculos == null){
+            throw new VendaSemVeiculosException("Impossivel criar uma venda sem veículos");
+        }
+
+
+        if(veiculos.size() < 1){
+           throw new VendaSemVeiculosException("Impossivel criar uma venda sem veículos");
+       }
+
         this.comprador = comprador;
         this.data =  LocalDateTime.now();
+        this.veiculos = veiculos;
     }
 
     public String getDescricao() {
@@ -36,14 +53,6 @@ public class Venda implements IPrinter {
         this.avista = avista;
     }
 
-
-    public Set<Veiculo> getVeiculos() {
-        return veiculos;
-    }
-
-    public void setVeiculos(Set<Veiculo> veiculos) {
-        this.veiculos = veiculos;
-    }
 
     public LocalDateTime getData() {
         return data;

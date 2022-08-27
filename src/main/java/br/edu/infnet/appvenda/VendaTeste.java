@@ -2,8 +2,10 @@ package br.edu.infnet.appvenda;
 
 
 import br.edu.infnet.appvenda.controller.VendaController;
+import br.edu.infnet.appvenda.exceptions.CompradorNuloException;
+import br.edu.infnet.appvenda.exceptions.CpfInvalidoException;
+import br.edu.infnet.appvenda.exceptions.VendaSemVeiculosException;
 import br.edu.infnet.appvenda.model.domain.*;
-import br.edu.infnet.appvenda.model.test.AppImpressao;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -20,14 +22,8 @@ public class VendaTeste implements ApplicationRunner {
     public void run(ApplicationArguments args)  {
 
         System.out.println("#venda");
-        Venda venda = null;
-        try {
-            venda = new Venda(new Comprador("Jose","11122233344","jose@gmail.com"));
-        } catch (Exception e) {
-            System.out.println("[ERROR] " + e.getMessage());
-        }
-        venda.setDescricao("Venda 1");
-        venda.setAvista(  true);
+
+
         Set<Veiculo> veiculos = new HashSet<Veiculo>();
 
         Automovel automovel1 = new Automovel();
@@ -37,7 +33,7 @@ public class VendaTeste implements ApplicationRunner {
         automovel1.setNome("Gol");
         automovel1.setValor(30000);
         automovel1.setMarca("volkswagen");
-        veiculos.add(automovel1);
+
 
         Motocicleta motocicleta = new Motocicleta();
         motocicleta.setPossuiCarenagem ( false);
@@ -46,8 +42,6 @@ public class VendaTeste implements ApplicationRunner {
         motocicleta.setNome( "Z400");
         motocicleta.setMarca( "Kawasaki");
         motocicleta.setValor( 23000);
-
-        veiculos.add(motocicleta);
 
 
         Caminhao caminhao2 = new Caminhao();
@@ -58,21 +52,21 @@ public class VendaTeste implements ApplicationRunner {
         caminhao2.setMarca( "Iveco");
         caminhao2.setValor(  100000);
 
+        veiculos.add(motocicleta);
+        veiculos.add(automovel1);
         veiculos.add(caminhao2);
 
-        venda.setVeiculos(veiculos);
 
-        VendaController.incluir(venda);
-
-
-        Venda venda2 = null;
         try {
-            venda2 = new Venda(new Comprador("Maria","11122233355","maria@gmail.com"));
-        } catch (Exception e) {
-            System.out.println("[ERROR] " + e.getMessage());
+            Venda venda  = new Venda(new Comprador("Jose","11122233344","jose@gmail.com"), veiculos);
+            venda.setDescricao("Venda 1");
+            venda.setAvista(  true);
+            VendaController.incluir(venda);
+
+        } catch (CpfInvalidoException | CompradorNuloException | VendaSemVeiculosException e) {
+            System.out.println("[ERROR - VENDA] " + e.getMessage());
         }
-        venda2.setDescricao(  "Venda 2");
-        venda2.setAvista(  false);
+
 
         Motocicleta motocicleta2 = new Motocicleta();
         motocicleta2.setPossuiCarenagem ( false);
@@ -84,18 +78,17 @@ public class VendaTeste implements ApplicationRunner {
 
         veiculos = new HashSet<Veiculo>();
         veiculos.add(motocicleta2);
-        venda2.setVeiculos(veiculos);
 
-        VendaController.incluir(venda2);
 
-        Venda venda3 = null;
         try {
-            venda3 = new Venda(new Comprador("Joao","11122233366","joao@gmail.com"));
-        } catch (Exception e) {
-            System.out.println("[ERROR] " + e.getMessage());
+            Venda venda2  = new Venda(new Comprador("Maria","11122233355","maria@gmail.com"),veiculos);
+            venda2.setDescricao(  "Venda 2");
+            venda2.setAvista(  false);
+            VendaController.incluir(venda2);
+
+        }  catch (CpfInvalidoException | CompradorNuloException | VendaSemVeiculosException e) {
+            System.out.println("[ERROR - VENDA] " + e.getMessage());
         }
-        venda3.setDescricao(  "Venda 3");
-        venda3.setAvista(  true);
 
         Caminhao caminhao3 = new Caminhao();
         caminhao3.setCapacidadeDeTransporte( 10000);
@@ -105,10 +98,57 @@ public class VendaTeste implements ApplicationRunner {
         caminhao3.setMarca( "Volvo");
         caminhao3.setValor(  150000);
 
+
         veiculos = new HashSet<Veiculo>();
         veiculos.add(caminhao3);
-        venda3.setVeiculos(veiculos);
 
-        VendaController.incluir(venda3);
+
+
+        try {
+            Venda venda3  = new Venda(new Comprador("Joao","11122233366","joao@gmail.com"), veiculos);
+            venda3.setDescricao(  "Venda 3");
+            venda3.setAvista(  true);
+            VendaController.incluir(venda3);
+        } catch (CpfInvalidoException | CompradorNuloException | VendaSemVeiculosException e) {
+            System.out.println("[ERROR - VENDA] " + e.getMessage());
+        }
+
+
+        try {
+            Comprador comprador = new Comprador("Joao","11122233366","joao@gmail.com");
+
+            Venda venda4 = new Venda(null, veiculos);
+            venda4.setDescricao(  "Venda 3");
+            venda4.setAvista(  true);
+            VendaController.incluir(venda4);
+        } catch (CpfInvalidoException | CompradorNuloException | VendaSemVeiculosException e) {
+            System.out.println("[ERROR - VENDA] " + e.getMessage());
+        }
+
+        try {
+            Comprador comprador = new Comprador("Joao","11122233366","joao@gmail.com");
+
+            veiculos = new HashSet<>();
+            Venda venda4 = new Venda(comprador, veiculos );
+            venda4.setDescricao(  "Venda 4");
+            venda4.setAvista(  true);
+            VendaController.incluir(venda4);
+        } catch (CpfInvalidoException | CompradorNuloException | VendaSemVeiculosException e) {
+            System.out.println("[ERROR - VENDA] " + e.getMessage());
+        }
+
+        try {
+            Comprador comprador = new Comprador("Joao","11122233366","joao@gmail.com");
+
+            veiculos = new HashSet<>();
+            Venda venda5 = new Venda(comprador, null );
+            venda5.setDescricao(  "Venda 5");
+            venda5.setAvista(  true);
+            VendaController.incluir(venda5);
+        } catch (CpfInvalidoException | CompradorNuloException | VendaSemVeiculosException e) {
+            System.out.println("[ERROR - VENDA] " + e.getMessage());
+        }
+
+
     }
 }
