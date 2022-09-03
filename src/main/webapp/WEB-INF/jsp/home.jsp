@@ -1,5 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,24 +15,45 @@
             <li class="nav-item">
                 <a class="nav-link active" href="/">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/automovel/lista">Automovel</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/caminhao/lista">Caminhão</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/motocicleta/lista">Motocicleta</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/veiculo/lista">Veiculo</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/comprador/lista">Comprador</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/venda/lista">Venda</a>
-            </li>
+
+            <c:if test="${not empty user}">
+                <li class="nav-item">
+                    <a class="nav-link" href="/usuario/lista">Usuário</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/automovel/lista">Automovel</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/caminhao/lista">Caminhão</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/motocicleta/lista">Motocicleta</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/veiculo/lista">Veiculo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/comprador/lista">Comprador</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/venda/lista">Venda</a>
+                </li>
+            </c:if>
+        </ul>
+        <ul class="navbar-nav">
+            <c:if test="${empty user}">
+                <li class="nav-item">
+                    <a class="nav-link" href="">Signup</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+            </c:if>
+            <c:if test="${not empty user}">
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout ${user}</a>
+                </li>
+            </c:if>
         </ul>
     </div>
 </nav>
@@ -166,7 +187,7 @@
         <tr>
             <td>quantidadeDePortas</td>
             <td>int</td>
-            <td>Quantidade de portas do automovel </td>
+            <td>Quantidade de portas do automovel</td>
         </tr>
         <tr>
             <td>tipo</td>
