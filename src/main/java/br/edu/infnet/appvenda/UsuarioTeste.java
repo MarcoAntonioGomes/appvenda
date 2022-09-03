@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class UsuarioTeste implements ApplicationRunner {
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
         Usuario usuario = new Usuario();
         usuario.setEmail("admin@admin.com");
         usuario.setNome("Administrador");

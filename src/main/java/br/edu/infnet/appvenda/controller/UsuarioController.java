@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -18,6 +20,18 @@ public class UsuarioController {
     private static Map<String, Usuario> mapaUsuario = new HashMap<>();
     private static Integer id = 1;
 
+    public static Usuario validar(String email, String senha){
+
+        Usuario usuario = mapaUsuario.get(email);
+        if(usuario != null && usuario.getSenha().equals(senha)){
+            return usuario;
+        }
+
+        return null;
+
+    }
+
+
     public static void incluir(Usuario usuario){
 
         mapaUsuario.put(usuario.getEmail(), usuario);
@@ -28,7 +42,7 @@ public class UsuarioController {
     public String exclusao(@PathVariable String email){
 
         excluir(email);
-        return "redirect://lista";
+        return "redirect:/usuario/lista";
     }
 
     public static void excluir(String email){
@@ -46,5 +60,19 @@ public class UsuarioController {
 
         return "usuario/lista";
     }
+
+    @GetMapping(value = "/usuario")
+    public String telaCadastro(){
+        return "usuario/cadastro";
+    }
+
+    @PostMapping(value = "/usuario/incluir")
+    public String inclusao(Usuario usuario){
+        incluir(usuario);
+        return "redirect:/";
+    }
+
+
+
 
 }

@@ -1,5 +1,6 @@
 package br.edu.infnet.appvenda.controller;
 
+import br.edu.infnet.appvenda.model.domain.Usuario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,29 +23,22 @@ public class AppController {
     @PostMapping(value = "/login")
     public String login(Model model, @RequestParam String email, @RequestParam String senha){
 
-        if(email.equalsIgnoreCase(senha)){
+        Usuario usuario = UsuarioController.validar(email, senha);
 
-            String nome = "Admin";
-
-            model.addAttribute("user",nome);
-
-           // return "redirect:/";
+        if(usuario != null){
+            model.addAttribute("user",usuario.getNome());
             return "home";
         }
-
-
-        //return "redirect:/login";
         return "login";
-
     }
 
     @GetMapping(value = "/logout")
     public String logout(Model model){
 
         model.addAttribute("user", "");
-
         return "redirect:/";
 
     }
+
 
 }

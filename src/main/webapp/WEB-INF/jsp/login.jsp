@@ -9,33 +9,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-sm bg-light navbar-light">
-    <div class="container-fluid">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link active" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/automovel/lista">Automovel</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/caminhao/lista">Caminhão</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/motocicleta/lista">Motocicleta</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/veiculo/lista">Veiculo</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/comprador/lista">Comprador</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/venda/lista">Venda</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+    <c:import url="/WEB-INF/jsp/menu.jsp"/>
 
 <div class="container mt-3">
     <h2>Login</h2>

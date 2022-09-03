@@ -9,54 +9,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-sm bg-light navbar-light">
-    <div class="container-fluid">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link active" href="/">Home</a>
-            </li>
-
-            <c:if test="${not empty user}">
-                <li class="nav-item">
-                    <a class="nav-link" href="/usuario/lista">Usuário</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/automovel/lista">Automovel</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/caminhao/lista">Caminhão</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/motocicleta/lista">Motocicleta</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/veiculo/lista">Veiculo</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/comprador/lista">Comprador</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/venda/lista">Venda</a>
-                </li>
-            </c:if>
-        </ul>
-        <ul class="navbar-nav">
-            <c:if test="${empty user}">
-                <li class="nav-item">
-                    <a class="nav-link" href="">Signup</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
-                </li>
-            </c:if>
-            <c:if test="${not empty user}">
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout">Logout ${user}</a>
-                </li>
-            </c:if>
-        </ul>
-    </div>
-</nav>
+    <c:import url="/WEB-INF/jsp/menu.jsp"/>
 
 <div class="container mt-3">
     <h2>AppVendas</h2>

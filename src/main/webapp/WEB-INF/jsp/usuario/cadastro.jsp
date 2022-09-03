@@ -9,33 +9,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-sm bg-light navbar-light">
-    <div class="container-fluid">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link active" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/automovel/lista">Automovel</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/caminhao/lista">Caminhão</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/motocicleta/lista">Motocicleta</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/veiculo/lista">Veiculo</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/comprador/lista">Comprador</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/venda/lista">Venda</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+    <c:import url="/WEB-INF/jsp/menu.jsp"/>
 
 <div class="container mt-3">
     <h2>Cadastro de usuários</h2>
@@ -46,12 +20,12 @@
         </div>
 
         <div class="mb-3 mt-3">
-            <label for="email">Email:</label>
+            <label>Email:</label>
             <input type="email" class="form-control"  placeholder="Entre com seu email" name="email">
         </div>
 
         <div class="mb-3">
-            <label for="pwd">Password:</label>
+            <label>Password:</label>
             <input type="password" class="form-control" placeholder="Entre com sua senha" name="senha">
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>
