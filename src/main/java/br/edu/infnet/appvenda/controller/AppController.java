@@ -1,6 +1,7 @@
 package br.edu.infnet.appvenda.controller;
 
 import br.edu.infnet.appvenda.model.domain.Usuario;
+import br.edu.infnet.appvenda.service.UsuarioService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +24,7 @@ public class AppController {
     @PostMapping(value = "/login")
     public String login(Model model, @RequestParam String email, @RequestParam String senha){
 
-        Usuario usuario = UsuarioController.validar(email, senha);
+        Usuario usuario = UsuarioService.validar(email, senha);
 
         if(usuario != null){
             model.addAttribute("user",usuario.getNome());
