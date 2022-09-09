@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AppController {
 
+    UsuarioService usuarioService = new UsuarioService();
+
     @GetMapping(value = "/")
     public String telaHome(){
         return "home";
@@ -24,7 +26,7 @@ public class AppController {
     @PostMapping(value = "/login")
     public String login(Model model, @RequestParam String email, @RequestParam String senha){
 
-        Usuario usuario = UsuarioService.validar(email, senha);
+        Usuario usuario = usuarioService.validar(email, senha);
 
         if(usuario != null){
             model.addAttribute("user",usuario.getNome());

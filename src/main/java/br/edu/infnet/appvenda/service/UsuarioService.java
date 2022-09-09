@@ -16,7 +16,7 @@ public class UsuarioService {
     private static Map<String, Usuario> mapaUsuario = new HashMap<>();
 
 
-    public static Usuario validar(String email, String senha){
+    public  Usuario validar(String email, String senha){
 
         Usuario usuario = mapaUsuario.get(email);
         if(usuario != null && usuario.getSenha().equals(senha)){
@@ -28,17 +28,17 @@ public class UsuarioService {
     }
 
 
-    public static void incluir(Usuario usuario){
+    public void incluir(Usuario usuario){
         mapaUsuario.put(usuario.getEmail(), usuario);
         new AppImpressao().relatorio(usuario,"Inclusão do usuario " +usuario.getNome() + " realizada com sucesso!!!");
     }
 
 
-    public static void excluir(String email){
+    public  void excluir(String email){
         mapaUsuario.remove(email);
     }
 
-    public static Collection<Usuario> obterLista(){
+    public  Collection<Usuario> obterLista(){
         return mapaUsuario.values();
     }
 
