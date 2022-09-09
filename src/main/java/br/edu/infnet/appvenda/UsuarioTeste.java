@@ -3,12 +3,16 @@ package br.edu.infnet.appvenda;
 
 import br.edu.infnet.appvenda.model.domain.Usuario;
 import br.edu.infnet.appvenda.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UsuarioTeste implements ApplicationRunner {
+
+    @Autowired
+    UsuarioService usuarioService;
 
     @Override
     public void run(ApplicationArguments args) {
@@ -17,7 +21,7 @@ public class UsuarioTeste implements ApplicationRunner {
         usuario.setNome("Administrador");
         usuario.setSenha("123");
 
-        UsuarioService usuarioService = new UsuarioService();
+
         usuarioService.incluir(usuario);
     }
 }

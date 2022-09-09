@@ -2,6 +2,7 @@ package br.edu.infnet.appvenda.controller;
 
 import br.edu.infnet.appvenda.model.domain.Usuario;
 import br.edu.infnet.appvenda.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AppController {
 
-    UsuarioService usuarioService = new UsuarioService();
+    @Autowired
+    UsuarioService usuarioService;
 
     @GetMapping(value = "/")
     public String telaHome(){
