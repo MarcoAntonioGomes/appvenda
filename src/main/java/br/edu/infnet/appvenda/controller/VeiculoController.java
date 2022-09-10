@@ -1,8 +1,6 @@
 package br.edu.infnet.appvenda.controller;
 
-import br.edu.infnet.appvenda.model.domain.Automovel;
-import br.edu.infnet.appvenda.model.domain.Caminhao;
-import br.edu.infnet.appvenda.model.domain.Motocicleta;
+
 import br.edu.infnet.appvenda.model.domain.Veiculo;
 import br.edu.infnet.appvenda.model.test.AppImpressao;
 import org.springframework.stereotype.Controller;

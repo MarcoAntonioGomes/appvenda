@@ -23,3 +23,7 @@ c;Caminhao
 a;capacidadeDeTransporte;float;Capacidade de transpote do caminhão em KG
 a;tipoCarroceria;String;Tipo de carroceria do caminhão. Ex: Bau
 a;torque;float;Torque do caminhão em mkgf
+c;Usuario
+a;nome;String;Nome do usuário
+a;senha;String;Senha do usuário
+a;email;String;Email do usuário

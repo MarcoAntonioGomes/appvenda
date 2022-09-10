@@ -1,9 +1,12 @@
 package br.edu.infnet.appvenda;
 
 
+import br.edu.infnet.appvenda.controller.AppController;
 import br.edu.infnet.appvenda.model.domain.app.Atributo;
 import br.edu.infnet.appvenda.model.domain.app.Classe;
 import br.edu.infnet.appvenda.model.domain.app.Projeto;
+import br.edu.infnet.appvenda.service.AppService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -17,6 +20,10 @@ import java.util.List;
 
 @Component
 public class AppTeste implements ApplicationRunner {
+
+    @Autowired
+    private AppService appService;
+
 
     @Override
     public void run(ApplicationArguments args) {
@@ -64,7 +71,7 @@ public class AppTeste implements ApplicationRunner {
                     linha = leitura.readLine();
                 }
 
-                projeto.impressao();
+                appService.incluir(projeto);
                 leitura.close();
                 fileReader.close();
             } catch (FileNotFoundException e) {
