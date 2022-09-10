@@ -1,11 +1,10 @@
 package br.edu.infnet.appvenda;
 
-import br.edu.infnet.appvenda.controller.AutomovelController;
-import br.edu.infnet.appvenda.controller.CompradorController;
+
 import br.edu.infnet.appvenda.exceptions.CpfInvalidoException;
-import br.edu.infnet.appvenda.exceptions.QuantidadePortasInvalidoException;
-import br.edu.infnet.appvenda.model.domain.Automovel;
 import br.edu.infnet.appvenda.model.domain.Comprador;
+import br.edu.infnet.appvenda.service.CompradorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -19,12 +18,12 @@ import java.util.List;
 @Component
 public class CompradorTeste implements ApplicationRunner {
 
+    @Autowired
+    private CompradorService compradorService;
+
     @Override
     public void run(ApplicationArguments args)  {
         System.out.println("#comprador");
-
-
-
 
 
         String dir = "C:/Users/marco/Desktop/POS-PROJETOS/appvenda/src/main/resources/files/";
@@ -43,7 +42,7 @@ public class CompradorTeste implements ApplicationRunner {
 
                     try {
                         Comprador c1 = new Comprador(campos.get(0), campos.get(1), campos.get(2));
-                        CompradorController.incluir(c1);
+                        compradorService.incluir(c1);
                     } catch (CpfInvalidoException e) {
                         System.out.println("[ERROR] " + e.getMessage());
                     }
@@ -65,8 +64,6 @@ public class CompradorTeste implements ApplicationRunner {
         } finally {
             System.out.println("Terminou!!!");
         }
-
-
 
     }
 }

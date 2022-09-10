@@ -3,6 +3,8 @@ package br.edu.infnet.appvenda;
 import br.edu.infnet.appvenda.controller.AutomovelController;
 import br.edu.infnet.appvenda.exceptions.QuantidadePortasInvalidoException;
 import br.edu.infnet.appvenda.model.domain.Automovel;
+import br.edu.infnet.appvenda.service.AutomovelService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -15,6 +17,10 @@ import java.util.List;
 
 @Component
 public class AutomovelTeste implements ApplicationRunner {
+
+    @Autowired
+    private AutomovelService automovelService;
+
 
     @Override
     public void run(ApplicationArguments args)  {
@@ -46,7 +52,7 @@ public class AutomovelTeste implements ApplicationRunner {
                         automovel1.setValor(Float.parseFloat(campos.get(2)));
                         automovel1.setMarca(campos.get(3));
                         System.out.println("Cálculo de venda: "+automovel1.calcularVenda());
-                        AutomovelController.incluir(automovel1);
+                        automovelService.incluir(automovel1);
                     } catch (QuantidadePortasInvalidoException e) {
                         System.out.println("[ERROR - Automovel] " + e.getMessage());
                     }

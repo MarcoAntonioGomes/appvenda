@@ -1,11 +1,12 @@
 package br.edu.infnet.appvenda;
 
 
-import br.edu.infnet.appvenda.controller.VendaController;
 import br.edu.infnet.appvenda.exceptions.CompradorNuloException;
 import br.edu.infnet.appvenda.exceptions.CpfInvalidoException;
 import br.edu.infnet.appvenda.exceptions.VendaSemVeiculosException;
 import br.edu.infnet.appvenda.model.domain.*;
+import br.edu.infnet.appvenda.service.VendaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,11 @@ import java.util.Set;
 
 @Component
 public class VendaTeste implements ApplicationRunner {
+
+    @Autowired
+    private VendaService vendaService;
+
+
 
     @Override
     public void run(ApplicationArguments args)  {
@@ -82,7 +88,7 @@ public class VendaTeste implements ApplicationRunner {
                         Venda venda  = new Venda(new Comprador(campos.get(1),campos.get(2),campos.get(3)), veiculos);
                         venda.setDescricao(campos.get(0));
                         venda.setAvista(  Boolean.valueOf(campos.get(4)));
-                        VendaController.incluir(venda);
+                        vendaService.incluir(venda);
 
                     } catch (CpfInvalidoException | CompradorNuloException | VendaSemVeiculosException e) {
                         System.out.println("[ERROR - VENDA] " + e.getMessage());

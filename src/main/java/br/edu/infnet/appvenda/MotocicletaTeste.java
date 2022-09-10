@@ -7,6 +7,8 @@ import br.edu.infnet.appvenda.exceptions.QuantidadePortasInvalidoException;
 import br.edu.infnet.appvenda.model.domain.Automovel;
 import br.edu.infnet.appvenda.model.domain.Motocicleta;
 import br.edu.infnet.appvenda.model.test.AppImpressao;
+import br.edu.infnet.appvenda.service.MotocicletaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -19,6 +21,9 @@ import java.util.List;
 
 @Component
 public class MotocicletaTeste implements ApplicationRunner {
+
+    @Autowired
+    private MotocicletaService motocicletaService;
 
     @Override
     public void run(ApplicationArguments args) {
@@ -48,7 +53,7 @@ public class MotocicletaTeste implements ApplicationRunner {
                         motocicleta1.setMarca( campos.get(4));
                         motocicleta1.setValor( Float.valueOf(campos.get(5)));
                         System.out.println("Cálculo de venda: "+motocicleta1.calcularVenda());
-                        MotocicletaController.incluir(motocicleta1);
+                        motocicletaService.incluir(motocicleta1);
                     } catch (NumeroCilindradasInvalidaException e) {
                         System.out.println("[ERROR - Motocicleta] " + e.getMessage());
                     }
@@ -71,8 +76,7 @@ public class MotocicletaTeste implements ApplicationRunner {
             System.out.println("Terminou!!!");
         }
 
-
-
-
     }
+
+
 }

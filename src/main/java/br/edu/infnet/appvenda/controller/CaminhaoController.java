@@ -4,6 +4,8 @@ package br.edu.infnet.appvenda.controller;
 
 import br.edu.infnet.appvenda.model.domain.Caminhao;
 import br.edu.infnet.appvenda.model.test.AppImpressao;
+import br.edu.infnet.appvenda.service.CaminhaoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,40 +16,22 @@ import java.util.*;
 @Controller
 public class CaminhaoController {
 
-
-    private static Map<Integer, Caminhao> mapaCaminhao = new HashMap<>();
-    private static Integer id = 1;
-
-    public static void incluir(Caminhao caminhao){
-
-        caminhao.setId(id++);
-        mapaCaminhao.put(caminhao.getId(), caminhao);
-
-        new AppImpressao().relatorio(caminhao, "Inclusão do caminhão " + caminhao.getNome() + " realizada com sucesso!!!");
-    }
-
+    @Autowired
+    private CaminhaoService caminhaoService;
 
     @GetMapping(value = "/caminhao/{id}/excluir")
     public String exclusao(@PathVariable Integer id){
 
-        excluir(id);
+        caminhaoService.excluir(id);
         return "redirect:/caminhao/lista";
     }
 
-
-    public static void excluir(Integer id){
-        mapaCaminhao.remove(id);
-    }
-
-    public static Collection<Caminhao> obterLista(){
-        return mapaCaminhao.values();
-    }
 
 
     @GetMapping(value = "/caminhao/lista")
     public String telaLista(Model model){
 
-        model.addAttribute("listagem", obterLista());
+        model.addAttribute("listagem",  caminhaoService.obterLista());
 
         return "caminhao/lista";
     }

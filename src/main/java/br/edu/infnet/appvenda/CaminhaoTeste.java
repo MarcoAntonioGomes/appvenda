@@ -1,11 +1,11 @@
 package br.edu.infnet.appvenda;
 
-import br.edu.infnet.appvenda.controller.AutomovelController;
+
 import br.edu.infnet.appvenda.controller.CaminhaoController;
 import br.edu.infnet.appvenda.exceptions.CapacidadeTransporteInvalidaException;
-import br.edu.infnet.appvenda.exceptions.QuantidadePortasInvalidoException;
-import br.edu.infnet.appvenda.model.domain.Automovel;
 import br.edu.infnet.appvenda.model.domain.Caminhao;
+import br.edu.infnet.appvenda.service.CaminhaoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -18,6 +18,9 @@ import java.util.List;
 
 @Component
 public class CaminhaoTeste implements ApplicationRunner {
+
+    @Autowired
+    private CaminhaoService caminhaoService;
 
     @Override
     public void run(ApplicationArguments args) {
@@ -47,7 +50,7 @@ public class CaminhaoTeste implements ApplicationRunner {
                         caminhao1.setMarca( campos.get(4));
                         caminhao1.setValor( Float.valueOf(campos.get(5)));
                         System.out.println("Cálculo de venda: "+caminhao1.calcularVenda());
-                        CaminhaoController.incluir(caminhao1);
+                        caminhaoService.incluir(caminhao1);
                     } catch (CapacidadeTransporteInvalidaException e) {
                         System.out.println("[ERROR - Caminhao] " + e.getMessage());
                     }
