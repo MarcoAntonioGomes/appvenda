@@ -1,0 +1,25 @@
+p;AppVendas;Projeto de Gestão de Venda de Veículos
+c;Venda;
+a;descricao;String;Descrição da venda
+a;data;LocalDateTime;Data de realização da venda
+a;avista;boolean;Indicativo se a compra é a vista ou não
+c;Comprador
+a;nome;String;Nome do comprador
+a;cpf;String;CPF do comprador
+a;email;String;email do comprador
+c;Veiculo
+a;nome;String;Nome do veiculo
+a;valor;float;Valor do veiculo
+a;marca;String;Marca do veiculo
+c;Motocicleta
+a;cilindrada;float;Valor das cilindradas da moto
+a;possuiCarenagem;boolean;Indicativo se a moto possui carenagem
+a;numeroDeMarchas;int;Número de marchas que a moto possui
+c;Automovel
+a;quantidadeDePortas;int;Quantidade de portas do automovel
+a;tipo;String;Tipo do automovel. Ex: Caminhonete, Carro...
+a;possuiAirbag;boolean;Indicativo se o carro possui airbag
+c;Caminhao
+a;capacidadeDeTransporte;float;Capacidade de transpote do caminhão em KG
+a;tipoCarroceria;String;Tipo de carroceria do caminhão. Ex: Bau
+a;torque;float;Torque do caminhão em mkgf
