@@ -3,13 +3,15 @@ package br.edu.infnet.appvenda.controller;
 
 
 
+import br.edu.infnet.appvenda.model.domain.Automovel;
+import br.edu.infnet.appvenda.model.domain.Caminhao;
 import br.edu.infnet.appvenda.service.CaminhaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
+import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
@@ -25,6 +27,18 @@ public class CaminhaoController {
         return "redirect:/caminhao/lista";
     }
 
+    @PostMapping(value = "caminhao/incluir")
+    public String incluir(Caminhao caminhao){
+
+        caminhaoService.incluir(caminhao);
+
+        return "redirect:/caminhao/lista";
+    }
+
+    @GetMapping(value = "/caminhao")
+    public String telaCadastro(){
+        return "caminhao/cadastro";
+    }
 
 
     @GetMapping(value = "/caminhao/lista")

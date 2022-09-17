@@ -1,3 +1,10 @@
-Venda 1;Jose;11122233344;jose@gmail.com;true
-Venda 2;Maria;11122233355;maria@gmail.com;false
-Venda 3;Joao;11122233366;joao@gmail.com;true
+V;Venda 1;Jose;11122233344;jose@gmail.com;true
+A;Carro comum;Gol;30000;volkswagen;false;4
+M;false;5;400;Z400;Kawasaki;23000
+V;Venda 2;Maria;11122233355;maria@gmail.com;false
+C;13000;Bau;500;Vertis;Iveco;200000
+A;Esportivo;A4;400000;Audi;true;4
+V;Venda 3;Joao;11122233366;joao@gmail.com;true
+M;true;4;150;CG Titan;Honda;8000
+A;Caminhonete;Strada;50000;Fiat;true;4
+C;13000;Bau;500;Vertis;Iveco;200000

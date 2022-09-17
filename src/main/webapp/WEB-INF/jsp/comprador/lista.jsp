@@ -17,6 +17,9 @@
 
 
     <h3>Classe: Comprador</h3>
+
+    <h4><a href="/comprador">Novo</a></h4>
+
     <table class="table table-striped">
         <thead>
         <tr>

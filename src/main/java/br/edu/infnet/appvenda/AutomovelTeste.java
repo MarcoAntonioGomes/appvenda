@@ -30,7 +30,7 @@ public class AutomovelTeste implements ApplicationRunner {
 
 
         String dir = "C:/Users/marco/Desktop/POS-PROJETOS/appvenda/src/main/resources/files/";
-        String arq = "automoveis.txt";
+        String arq = "veiculos.txt";
 
         try {
             try {
@@ -44,15 +44,23 @@ public class AutomovelTeste implements ApplicationRunner {
                     List<String> campos = List.of(linha.split(";"));
 
                     try {
-                        Automovel automovel1 = new Automovel();
-                        automovel1.setPossuiAirbag(Boolean.valueOf(campos.get(4)));
-                        automovel1.setQuantidadeDePortas(Integer.valueOf(campos.get(5)));
-                        automovel1.setTipo(campos.get(0));
-                        automovel1.setNome(campos.get(1));
-                        automovel1.setValor(Float.parseFloat(campos.get(2)));
-                        automovel1.setMarca(campos.get(3));
-                        System.out.println("Cálculo de venda: "+automovel1.calcularVenda());
-                        automovelService.incluir(automovel1);
+
+                        if(campos.get(0).equalsIgnoreCase("A")){
+
+                            Automovel automovel1 = new Automovel();
+                            automovel1.setPossuiAirbag(Boolean.valueOf(campos.get(5)));
+                            automovel1.setQuantidadeDePortas(Integer.valueOf(campos.get(6)));
+                            automovel1.setTipo(campos.get(1));
+                            automovel1.setNome(campos.get(2));
+                            automovel1.setValor(Float.parseFloat(campos.get(3)));
+                            automovel1.setMarca(campos.get(4));
+                            System.out.println("Cálculo de venda: "+automovel1.calcularVenda());
+                            automovelService.incluir(automovel1);
+
+                        }
+
+
+
                     } catch (QuantidadePortasInvalidoException e) {
                         System.out.println("[ERROR - Automovel] " + e.getMessage());
                     }

@@ -30,7 +30,7 @@ public class MotocicletaTeste implements ApplicationRunner {
         System.out.println("#motocicleta");
 
         String dir = "C:/Users/marco/Desktop/POS-PROJETOS/appvenda/src/main/resources/files/";
-        String arq = "motocicletas.txt";
+        String arq = "veiculos.txt";
 
 
         try {
@@ -44,16 +44,20 @@ public class MotocicletaTeste implements ApplicationRunner {
 
                     List<String> campos = List.of(linha.split(";"));
 
+
                     try {
-                        Motocicleta motocicleta1 = new Motocicleta();
-                        motocicleta1.setPossuiCarenagem ( Boolean.valueOf(campos.get(0)));
-                        motocicleta1.setNumeroDeMarchas ( Integer.valueOf(campos.get(1)));
-                        motocicleta1.setCilindrada( Integer.valueOf(campos.get(2)));
-                        motocicleta1.setNome(campos.get(3));
-                        motocicleta1.setMarca( campos.get(4));
-                        motocicleta1.setValor( Float.valueOf(campos.get(5)));
-                        System.out.println("Cálculo de venda: "+motocicleta1.calcularVenda());
-                        motocicletaService.incluir(motocicleta1);
+                        if(campos.get(0).equalsIgnoreCase("M")) {
+
+                            Motocicleta motocicleta1 = new Motocicleta();
+                            motocicleta1.setPossuiCarenagem(Boolean.valueOf(campos.get(1)));
+                            motocicleta1.setNumeroDeMarchas(Integer.valueOf(campos.get(2)));
+                            motocicleta1.setCilindrada(Integer.valueOf(campos.get(3)));
+                            motocicleta1.setNome(campos.get(4));
+                            motocicleta1.setMarca(campos.get(5));
+                            motocicleta1.setValor(Float.valueOf(campos.get(6)));
+                            System.out.println("Cálculo de venda: " + motocicleta1.calcularVenda());
+                            motocicletaService.incluir(motocicleta1);
+                        }
                     } catch (NumeroCilindradasInvalidaException e) {
                         System.out.println("[ERROR - Motocicleta] " + e.getMessage());
                     }

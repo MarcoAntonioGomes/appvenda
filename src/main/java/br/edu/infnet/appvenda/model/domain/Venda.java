@@ -22,14 +22,14 @@ public class Venda implements IPrinter {
            throw new CompradorNuloException("Impossivel criar um pedido sem um solicitante");
        }
 
-        if(veiculos == null){
-            throw new VendaSemVeiculosException("Impossivel criar uma venda sem veículos");
-        }
-
-
-        if(veiculos.size() < 1){
-           throw new VendaSemVeiculosException("Impossivel criar uma venda sem veículos");
-       }
+//        if(veiculos == null){
+//            throw new VendaSemVeiculosException("Impossivel criar uma venda sem veículos");
+//        }
+//
+//
+//        if(veiculos.size() < 1){
+//           throw new VendaSemVeiculosException("Impossivel criar uma venda sem veículos");
+//       }
 
         this.comprador = comprador;
         this.data =  LocalDateTime.now();

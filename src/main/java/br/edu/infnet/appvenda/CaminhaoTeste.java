@@ -28,7 +28,7 @@ public class CaminhaoTeste implements ApplicationRunner {
         System.out.println("#caminhao");
 
         String dir = "C:/Users/marco/Desktop/POS-PROJETOS/appvenda/src/main/resources/files/";
-        String arq = "caminhoes.txt";
+        String arq = "veiculos.txt";
 
         try {
             try {
@@ -41,16 +41,21 @@ public class CaminhaoTeste implements ApplicationRunner {
 
                     List<String> campos = List.of(linha.split(";"));
 
+
                     try {
-                        Caminhao caminhao1 = new Caminhao();
-                        caminhao1.setCapacidadeDeTransporte(Float.valueOf(campos.get(0)));
-                        caminhao1.setTipoCarroceria(campos.get(1));
-                        caminhao1.setTorque( Float.valueOf(campos.get(2)));
-                        caminhao1.setNome(campos.get(3));
-                        caminhao1.setMarca( campos.get(4));
-                        caminhao1.setValor( Float.valueOf(campos.get(5)));
-                        System.out.println("Cálculo de venda: "+caminhao1.calcularVenda());
-                        caminhaoService.incluir(caminhao1);
+
+                        if(campos.get(0).equalsIgnoreCase("C")) {
+
+                            Caminhao caminhao1 = new Caminhao();
+                            caminhao1.setCapacidadeDeTransporte(Float.valueOf(campos.get(1)));
+                            caminhao1.setTipoCarroceria(campos.get(2));
+                            caminhao1.setTorque(Float.valueOf(campos.get(3)));
+                            caminhao1.setNome(campos.get(4));
+                            caminhao1.setMarca(campos.get(5));
+                            caminhao1.setValor(Float.valueOf(campos.get(6)));
+                            System.out.println("Cálculo de venda: " + caminhao1.calcularVenda());
+                            caminhaoService.incluir(caminhao1);
+                        }
                     } catch (CapacidadeTransporteInvalidaException e) {
                         System.out.println("[ERROR - Caminhao] " + e.getMessage());
                     }

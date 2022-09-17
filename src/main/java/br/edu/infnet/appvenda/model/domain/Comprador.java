@@ -3,14 +3,22 @@ package br.edu.infnet.appvenda.model.domain;
 import br.edu.infnet.appvenda.exceptions.CpfInvalidoException;
 import br.edu.infnet.appvenda.interfaces.IPrinter;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "TComprador")
 public class Comprador implements IPrinter {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
     private  String cpf;
     private  String email;
 
 
+    public Comprador() {
+    }
 
     public Comprador(String nome, String cpf, String email) throws CpfInvalidoException{
         this.nome = nome;

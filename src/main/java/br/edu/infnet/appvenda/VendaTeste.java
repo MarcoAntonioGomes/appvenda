@@ -3,6 +3,7 @@ package br.edu.infnet.appvenda;
 
 import br.edu.infnet.appvenda.exceptions.CompradorNuloException;
 import br.edu.infnet.appvenda.exceptions.CpfInvalidoException;
+import br.edu.infnet.appvenda.exceptions.QuantidadePortasInvalidoException;
 import br.edu.infnet.appvenda.exceptions.VendaSemVeiculosException;
 import br.edu.infnet.appvenda.model.domain.*;
 import br.edu.infnet.appvenda.service.VendaService;
@@ -16,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -28,46 +30,14 @@ public class VendaTeste implements ApplicationRunner {
     private VendaService vendaService;
 
 
-
     @Override
-    public void run(ApplicationArguments args)  {
+    public void run(ApplicationArguments args) {
 
         System.out.println("#venda");
 
 
         Set<Veiculo> veiculos = new HashSet<Veiculo>();
-
-        Automovel automovel1 = new Automovel();
-        automovel1.setPossuiAirbag(true);
-        automovel1.setQuantidadeDePortas(4);
-        automovel1.setTipo("Carro comum");
-        automovel1.setNome("Gol");
-        automovel1.setValor(30000);
-        automovel1.setMarca("volkswagen");
-
-
-        Motocicleta motocicleta = new Motocicleta();
-        motocicleta.setPossuiCarenagem ( false);
-        motocicleta.setNumeroDeMarchas ( 5);
-        motocicleta.setCilindrada( 400);
-        motocicleta.setNome( "Z400");
-        motocicleta.setMarca( "Kawasaki");
-        motocicleta.setValor( 23000);
-
-
-        Caminhao caminhao2 = new Caminhao();
-        caminhao2.setCapacidadeDeTransporte( 9000);
-        caminhao2.setTipoCarroceria( "Plataforma");
-        caminhao2.setTorque( 300);
-        caminhao2.setNome( "45s14");
-        caminhao2.setMarca( "Iveco");
-        caminhao2.setValor(  100000);
-
-        veiculos.add(motocicleta);
-        veiculos.add(automovel1);
-        veiculos.add(caminhao2);
-
-
+        List<Venda> vendas = new ArrayList<>();
 
 
         String dir = "C:/Users/marco/Desktop/POS-PROJETOS/appvenda/src/main/resources/files/";
@@ -80,21 +50,65 @@ public class VendaTeste implements ApplicationRunner {
 
                 String linha = leitura.readLine();
 
-                while (linha != null){
+                while (linha != null) {
 
                     List<String> campos = List.of(linha.split(";"));
 
-                    try {
-                        Venda venda  = new Venda(new Comprador(campos.get(1),campos.get(2),campos.get(3)), veiculos);
-                        venda.setDescricao(campos.get(0));
-                        venda.setAvista(  Boolean.valueOf(campos.get(4)));
-                        vendaService.incluir(venda);
+                    switch (campos.get(0).toUpperCase()) {
+                        case "V":
+                            try {
+                                Venda venda = new Venda(new Comprador(campos.get(2), campos.get(3), campos.get(4)), veiculos);
+                                venda.setDescricao(campos.get(1));
+                                venda.setAvista(Boolean.valueOf(campos.get(5)));
+                                vendas.add(venda);
+                            } catch (CpfInvalidoException | CompradorNuloException | VendaSemVeiculosException e) {
+                                System.out.println("[ERROR - VENDA] " + e.getMessage());
+                            }
+                            break;
+                        case "A":
 
-                    } catch (CpfInvalidoException | CompradorNuloException | VendaSemVeiculosException e) {
-                        System.out.println("[ERROR - VENDA] " + e.getMessage());
+                            Automovel automovel = new Automovel();
+                            automovel.setPossuiAirbag(Boolean.valueOf(campos.get(5)));
+                            automovel.setQuantidadeDePortas(Integer.valueOf(campos.get(6)));
+                            automovel.setTipo(campos.get(1));
+                            automovel.setNome(campos.get(2));
+                            automovel.setValor(Float.parseFloat(campos.get(3)));
+                            automovel.setMarca(campos.get(4));
+                            veiculos.add(automovel);
+
+                            break;
+                        case "C":
+
+                            Caminhao caminhao = new Caminhao();
+                            caminhao.setCapacidadeDeTransporte(Float.valueOf(campos.get(1)));
+                            caminhao.setTipoCarroceria(campos.get(2));
+                            caminhao.setTorque(Float.valueOf(campos.get(3)));
+                            caminhao.setNome(campos.get(4));
+                            caminhao.setMarca(campos.get(5));
+                            caminhao.setValor(Float.valueOf(campos.get(6)));
+                            veiculos.add(caminhao);
+
+                            break;
+                        case "M":
+
+                            Motocicleta motocicleta = new Motocicleta();
+                            motocicleta.setPossuiCarenagem(Boolean.valueOf(campos.get(1)));
+                            motocicleta.setNumeroDeMarchas(Integer.valueOf(campos.get(2)));
+                            motocicleta.setCilindrada(Integer.valueOf(campos.get(3)));
+                            motocicleta.setNome(campos.get(4));
+                            motocicleta.setMarca(campos.get(5));
+                            motocicleta.setValor(Float.valueOf(campos.get(6)));
+                            veiculos.add(motocicleta);
+
+                            break;
                     }
 
+
                     linha = leitura.readLine();
+                }
+
+                for (Venda v : vendas) {
+                    vendaService.incluir(v);
                 }
 
 

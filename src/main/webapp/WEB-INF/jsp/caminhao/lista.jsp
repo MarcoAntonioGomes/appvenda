@@ -15,7 +15,7 @@
     <h2>AppVendas</h2>
     <p>Projeto de Gestão de Venda de Veículos</p>
 
-
+    <h4><a href="/caminhao">Novo</a></h4>
 
     <h3>Classe: Caminhão</h3>
     <table class="table table-striped">
