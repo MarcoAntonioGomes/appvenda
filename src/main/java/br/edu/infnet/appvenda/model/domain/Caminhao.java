@@ -2,6 +2,11 @@ package br.edu.infnet.appvenda.model.domain;
 
 import br.edu.infnet.appvenda.exceptions.CapacidadeTransporteInvalidaException;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "TCaminhao")
 public class Caminhao  extends Veiculo{
 
     private float capacidadeDeTransporte;

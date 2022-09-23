@@ -2,7 +2,9 @@ package br.edu.infnet.appvenda.service;
 
 
 import br.edu.infnet.appvenda.model.domain.Caminhao;
+import br.edu.infnet.appvenda.model.repository.CaminhaoRepository;
 import br.edu.infnet.appvenda.model.test.AppImpressao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -12,13 +14,13 @@ import java.util.Map;
 @Service
 public class CaminhaoService {
 
-    private static Map<Integer, Caminhao> mapaCaminhao = new HashMap<>();
-    private static Integer id = 1;
+    @Autowired
+    private CaminhaoRepository caminhaoRepository;
+
 
     public void incluir(Caminhao caminhao){
 
-        caminhao.setId(id++);
-        mapaCaminhao.put(caminhao.getId(), caminhao);
+        caminhaoRepository.save(caminhao);
 
         new AppImpressao().relatorio(caminhao, "Inclusão do caminhão " + caminhao.getNome() + " realizada com sucesso!!!");
     }
@@ -26,11 +28,11 @@ public class CaminhaoService {
 
 
     public  void excluir(Integer id){
-        mapaCaminhao.remove(id);
+        caminhaoRepository.deleteById(id);
     }
 
     public  Collection<Caminhao> obterLista(){
-        return mapaCaminhao.values();
+        return (Collection<Caminhao>) caminhaoRepository.findAll();
     }
 
 

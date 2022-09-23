@@ -1,7 +1,10 @@
 package br.edu.infnet.appvenda.service;
 
 import br.edu.infnet.appvenda.model.domain.Comprador;
+import br.edu.infnet.appvenda.model.domain.Usuario;
+import br.edu.infnet.appvenda.model.repository.CompradorRepository;
 import br.edu.infnet.appvenda.model.test.AppImpressao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -9,15 +12,13 @@ import java.util.*;
 @Service
 public class CompradorService {
 
-    private static List<Comprador> compradores = new ArrayList<>();
-    private static Map<Integer, Comprador> mapaComprador = new HashMap();
-    private static Integer id = 1;
+    @Autowired
+    private CompradorRepository compradorRepository;
+
 
     public void incluir(Comprador comprador){
 
-        comprador.setId(id++);
-        mapaComprador.put(comprador.getId(), comprador);
-
+        compradorRepository.save(comprador);
         new AppImpressao().relatorio(comprador,"Inclusão do comprador " + comprador.getNome() + "realizada com sucesso!!!");
 
     }
@@ -25,13 +26,21 @@ public class CompradorService {
 
 
     public void excluir(Integer id){
-        mapaComprador.remove(id);
+
+        compradorRepository.deleteById(id);
+
     }
 
 
     public Collection<Comprador> obterLista(){
-        return mapaComprador.values();
+        return (Collection<Comprador>) compradorRepository.findAll();
     }
+
+
+    public Collection<Comprador> obterLista(Usuario usuario){
+        return  compradorRepository.obterLista(usuario.getId());
+    }
+
 
 
 }

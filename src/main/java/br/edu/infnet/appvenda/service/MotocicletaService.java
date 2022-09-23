@@ -1,7 +1,9 @@
 package br.edu.infnet.appvenda.service;
 
 import br.edu.infnet.appvenda.model.domain.Motocicleta;
+import br.edu.infnet.appvenda.model.repository.MotocicletaRepository;
 import br.edu.infnet.appvenda.model.test.AppImpressao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -11,25 +13,23 @@ import java.util.Map;
 @Service
 public class MotocicletaService {
 
-    private static Map<Integer, Motocicleta> mapaMotocicleta = new HashMap<>();
-    private static Integer id = 1;
+    @Autowired
+    private MotocicletaRepository motocicletaRepository;
 
     public void incluir (Motocicleta motocicleta){
 
-        motocicleta.setId(id++);
-        mapaMotocicleta.put(motocicleta.getId(),motocicleta);
-
+        motocicletaRepository.save(motocicleta);
         new AppImpressao().relatorio(motocicleta, "Inclusão da motocicleta " + motocicleta.getNome() + " realizada com sucesso !!! ");
     }
 
 
-    public static void excluir(Integer id){
-        mapaMotocicleta.remove(id);
+    public void excluir(Integer id){
+        motocicletaRepository.deleteById(id);
     }
 
 
-    public static Collection<Motocicleta> obterLista(){
-        return mapaMotocicleta.values();
+    public Collection<Motocicleta> obterLista(){
+        return (Collection<Motocicleta>) motocicletaRepository.findAll();
     }
 
 

@@ -3,13 +3,12 @@ package br.edu.infnet.appvenda.controller;
 
 
 import br.edu.infnet.appvenda.model.domain.Comprador;
+import br.edu.infnet.appvenda.model.domain.Usuario;
 import br.edu.infnet.appvenda.service.CompradorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -19,9 +18,9 @@ public class CompradorController {
     private CompradorService compradorService;
 
     @GetMapping(value = "/comprador/lista")
-    public String telaLista(Model model){
+    public String telaLista(Model model, @SessionAttribute("user") Usuario usuario){
 
-        model.addAttribute("listagem", compradorService.obterLista());
+        model.addAttribute("listagem", compradorService.obterLista(usuario));
 
         return "comprador/lista";
     }
@@ -42,7 +41,9 @@ public class CompradorController {
 
 
     @PostMapping(value = "comprador/incluir")
-    public String incluir(Comprador comprador){
+    public String incluir(Comprador comprador, @SessionAttribute("user") Usuario usuario){
+
+        comprador.setUsuario(usuario);
 
         compradorService.incluir(comprador);
 

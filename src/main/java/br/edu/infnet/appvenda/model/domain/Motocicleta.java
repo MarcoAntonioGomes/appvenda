@@ -2,6 +2,11 @@ package br.edu.infnet.appvenda.model.domain;
 
 import br.edu.infnet.appvenda.exceptions.NumeroCilindradasInvalidaException;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "TMotocicleta")
 public class Motocicleta extends Veiculo{
 
     private int cilindrada;

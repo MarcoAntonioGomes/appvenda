@@ -3,6 +3,7 @@ package br.edu.infnet.appvenda;
 
 import br.edu.infnet.appvenda.exceptions.CpfInvalidoException;
 import br.edu.infnet.appvenda.model.domain.Comprador;
+import br.edu.infnet.appvenda.model.domain.Usuario;
 import br.edu.infnet.appvenda.service.CompradorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -25,6 +26,8 @@ public class CompradorTeste implements ApplicationRunner {
     public void run(ApplicationArguments args)  {
         System.out.println("#comprador");
 
+        Usuario usuario = new Usuario();
+        usuario.setId(1);
 
         String dir = "C:/Users/marco/Desktop/POS-PROJETOS/appvenda/src/main/resources/files/";
         String arq = "compradores.txt";
@@ -42,6 +45,7 @@ public class CompradorTeste implements ApplicationRunner {
 
                     try {
                         Comprador c1 = new Comprador(campos.get(0), campos.get(1), campos.get(2));
+                        c1.setUsuario(usuario);
                         compradorService.incluir(c1);
                     } catch (CpfInvalidoException e) {
                         System.out.println("[ERROR] " + e.getMessage());

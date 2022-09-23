@@ -15,7 +15,9 @@ public class Comprador implements IPrinter {
     private String nome;
     private  String cpf;
     private  String email;
-
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuario;
 
     public Comprador() {
     }
@@ -32,6 +34,14 @@ public class Comprador implements IPrinter {
             throw new CpfInvalidoException("Não é possível aceitar CPF sem preenchimento");
         }
 
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public String getNome() {

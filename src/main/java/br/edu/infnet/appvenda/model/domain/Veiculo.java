@@ -5,10 +5,16 @@ import br.edu.infnet.appvenda.exceptions.NumeroCilindradasInvalidaException;
 import br.edu.infnet.appvenda.exceptions.QuantidadePortasInvalidoException;
 import br.edu.infnet.appvenda.interfaces.IPrinter;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "TVeiculo")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Veiculo implements IPrinter {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
     private  float valor;
