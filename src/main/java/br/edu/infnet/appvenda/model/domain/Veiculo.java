@@ -6,6 +6,7 @@ import br.edu.infnet.appvenda.exceptions.QuantidadePortasInvalidoException;
 import br.edu.infnet.appvenda.interfaces.IPrinter;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,6 +21,12 @@ public abstract class Veiculo implements IPrinter {
     private  float valor;
     private  String marca;
 
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuario;
+
+    @ManyToMany(mappedBy = "veiculos")
+    private List<Venda> vendas;
 
     public abstract float calcularVenda() throws NumeroCilindradasInvalidaException, QuantidadePortasInvalidoException, CapacidadeTransporteInvalidaException;
 
@@ -53,6 +60,22 @@ public abstract class Veiculo implements IPrinter {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<Venda> getVendas() {
+        return vendas;
+    }
+
+    public void setVendas(List<Venda> vendas) {
+        this.vendas = vendas;
     }
 
     @Override

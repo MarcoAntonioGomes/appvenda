@@ -1,7 +1,9 @@
 package br.edu.infnet.appvenda.service;
 
 
+import br.edu.infnet.appvenda.model.domain.Automovel;
 import br.edu.infnet.appvenda.model.domain.Caminhao;
+import br.edu.infnet.appvenda.model.domain.Usuario;
 import br.edu.infnet.appvenda.model.repository.CaminhaoRepository;
 import br.edu.infnet.appvenda.model.test.AppImpressao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,9 @@ public class CaminhaoService {
         return (Collection<Caminhao>) caminhaoRepository.findAll();
     }
 
+    public  Collection<Caminhao> obterLista(Usuario usuario){
+        return (Collection<Caminhao>) caminhaoRepository.findAll(usuario.getId());
+    }
 
 
 

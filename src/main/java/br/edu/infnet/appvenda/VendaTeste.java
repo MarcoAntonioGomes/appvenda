@@ -10,6 +10,7 @@ import br.edu.infnet.appvenda.service.VendaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 
@@ -24,6 +25,7 @@ import java.util.Set;
 
 
 @Component
+@Order(6)
 public class VendaTeste implements ApplicationRunner {
 
     @Autowired
@@ -33,97 +35,134 @@ public class VendaTeste implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
 
-        System.out.println("#venda");
 
 
-        Set<Veiculo> veiculos = new HashSet<Veiculo>();
-        List<Venda> vendas = new ArrayList<>();
+        Comprador comprador = new Comprador();
+        comprador.setId(1);
 
+        Usuario usuario = new Usuario();
+        usuario.setId(1);
 
-        String dir = "C:/Users/marco/Desktop/POS-PROJETOS/appvenda/src/main/resources/files/";
-        String arq = "vendas.txt";
-
+        Venda venda = null;
         try {
-            try {
-                FileReader fileReader = new FileReader(dir + arq);
-                BufferedReader leitura = new BufferedReader(fileReader);
+            Set<Veiculo> veiculos = new HashSet<Veiculo>();
 
-                String linha = leitura.readLine();
+            Automovel automovel = new Automovel();
+            automovel.setId(1);
 
-                while (linha != null) {
+            Motocicleta motocicleta = new Motocicleta();
+            motocicleta.setId(8);
 
-                    List<String> campos = List.of(linha.split(";"));
+            Caminhao caminhao = new Caminhao();
+            caminhao.setId(5);
 
-                    switch (campos.get(0).toUpperCase()) {
-                        case "V":
-                            try {
-                                Venda venda = new Venda(new Comprador(campos.get(2), campos.get(3), campos.get(4)), veiculos);
-                                venda.setDescricao(campos.get(1));
-                                venda.setAvista(Boolean.valueOf(campos.get(5)));
-                                vendas.add(venda);
-                            } catch (CpfInvalidoException | CompradorNuloException | VendaSemVeiculosException e) {
-                                System.out.println("[ERROR - VENDA] " + e.getMessage());
-                            }
-                            break;
-                        case "A":
+            veiculos.add(automovel);
+            veiculos.add(motocicleta);
+            veiculos.add(caminhao);
 
-                            Automovel automovel = new Automovel();
-                            automovel.setPossuiAirbag(Boolean.valueOf(campos.get(5)));
-                            automovel.setQuantidadeDePortas(Integer.valueOf(campos.get(6)));
-                            automovel.setTipo(campos.get(1));
-                            automovel.setNome(campos.get(2));
-                            automovel.setValor(Float.parseFloat(campos.get(3)));
-                            automovel.setMarca(campos.get(4));
-                            veiculos.add(automovel);
+            venda = new Venda(comprador, veiculos);
+            venda.setDescricao("Primeiro Pedido");
+            venda.setAvista(true);
+            venda.setUsuario(usuario);
+            vendaService.incluir(venda);
 
-                            break;
-                        case "C":
-
-                            Caminhao caminhao = new Caminhao();
-                            caminhao.setCapacidadeDeTransporte(Float.valueOf(campos.get(1)));
-                            caminhao.setTipoCarroceria(campos.get(2));
-                            caminhao.setTorque(Float.valueOf(campos.get(3)));
-                            caminhao.setNome(campos.get(4));
-                            caminhao.setMarca(campos.get(5));
-                            caminhao.setValor(Float.valueOf(campos.get(6)));
-                            veiculos.add(caminhao);
-
-                            break;
-                        case "M":
-
-                            Motocicleta motocicleta = new Motocicleta();
-                            motocicleta.setPossuiCarenagem(Boolean.valueOf(campos.get(1)));
-                            motocicleta.setNumeroDeMarchas(Integer.valueOf(campos.get(2)));
-                            motocicleta.setCilindrada(Integer.valueOf(campos.get(3)));
-                            motocicleta.setNome(campos.get(4));
-                            motocicleta.setMarca(campos.get(5));
-                            motocicleta.setValor(Float.valueOf(campos.get(6)));
-                            veiculos.add(motocicleta);
-
-                            break;
-                    }
+        } catch ( CompradorNuloException | VendaSemVeiculosException e) {
+            System.out.println("[ERROR - VENDA] " + e.getMessage());}
 
 
-                    linha = leitura.readLine();
-                }
-
-                for (Venda v : vendas) {
-                    vendaService.incluir(v);
-                }
 
 
-                leitura.close();
-                fileReader.close();
-            } catch (FileNotFoundException e) {
-                System.out.println("[ERRO] O arquivo não existe!!!");
-            } catch (IOException e) {
-                System.out.println("[ERRO] Problema no fechamento do arquivo!!!");
-            }
-
-
-        } finally {
-            System.out.println("Terminou!!!");
-        }
+//        System.out.println("#venda");
+//
+//
+//        Set<Veiculo> veiculos = new HashSet<Veiculo>();
+//        List<Venda> vendas = new ArrayList<>();
+//
+//
+//        String dir = "C:/Users/marco/Desktop/POS-PROJETOS/appvenda/src/main/resources/files/";
+//        String arq = "vendas.txt";
+//
+//        try {
+//            try {
+//                FileReader fileReader = new FileReader(dir + arq);
+//                BufferedReader leitura = new BufferedReader(fileReader);
+//
+//                String linha = leitura.readLine();
+//
+//                while (linha != null) {
+//
+//                    List<String> campos = List.of(linha.split(";"));
+//
+//                    switch (campos.get(0).toUpperCase()) {
+//                        case "V":
+//                            try {
+//                                Venda venda = new Venda(new Comprador(campos.get(2), campos.get(3), campos.get(4)), veiculos);
+//                                venda.setDescricao(campos.get(1));
+//                                venda.setAvista(Boolean.valueOf(campos.get(5)));
+//                                vendas.add(venda);
+//                            } catch (CpfInvalidoException | CompradorNuloException | VendaSemVeiculosException e) {
+//                                System.out.println("[ERROR - VENDA] " + e.getMessage());
+//                            }
+//                            break;
+//                        case "A":
+//
+//                            Automovel automovel = new Automovel();
+//                            automovel.setPossuiAirbag(Boolean.valueOf(campos.get(5)));
+//                            automovel.setQuantidadeDePortas(Integer.valueOf(campos.get(6)));
+//                            automovel.setTipo(campos.get(1));
+//                            automovel.setNome(campos.get(2));
+//                            automovel.setValor(Float.parseFloat(campos.get(3)));
+//                            automovel.setMarca(campos.get(4));
+//                            veiculos.add(automovel);
+//
+//                            break;
+//                        case "C":
+//
+//                            Caminhao caminhao = new Caminhao();
+//                            caminhao.setCapacidadeDeTransporte(Float.valueOf(campos.get(1)));
+//                            caminhao.setTipoCarroceria(campos.get(2));
+//                            caminhao.setTorque(Float.valueOf(campos.get(3)));
+//                            caminhao.setNome(campos.get(4));
+//                            caminhao.setMarca(campos.get(5));
+//                            caminhao.setValor(Float.valueOf(campos.get(6)));
+//                            veiculos.add(caminhao);
+//
+//                            break;
+//                        case "M":
+//
+//                            Motocicleta motocicleta = new Motocicleta();
+//                            motocicleta.setPossuiCarenagem(Boolean.valueOf(campos.get(1)));
+//                            motocicleta.setNumeroDeMarchas(Integer.valueOf(campos.get(2)));
+//                            motocicleta.setCilindrada(Integer.valueOf(campos.get(3)));
+//                            motocicleta.setNome(campos.get(4));
+//                            motocicleta.setMarca(campos.get(5));
+//                            motocicleta.setValor(Float.valueOf(campos.get(6)));
+//                            veiculos.add(motocicleta);
+//
+//                            break;
+//                    }
+//
+//
+//                    linha = leitura.readLine();
+//                }
+//
+//                for (Venda v : vendas) {
+//                    vendaService.incluir(v);
+//                }
+//
+//
+//                leitura.close();
+//                fileReader.close();
+//            } catch (FileNotFoundException e) {
+//                System.out.println("[ERRO] O arquivo não existe!!!");
+//            } catch (IOException e) {
+//                System.out.println("[ERRO] Problema no fechamento do arquivo!!!");
+//            }
+//
+//
+//        } finally {
+//            System.out.println("Terminou!!!");
+//        }
 
     }
 }

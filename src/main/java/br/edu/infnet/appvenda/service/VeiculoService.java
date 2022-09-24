@@ -1,32 +1,32 @@
 package br.edu.infnet.appvenda.service;
 
 
+import br.edu.infnet.appvenda.model.domain.Usuario;
 import br.edu.infnet.appvenda.model.domain.Veiculo;
+import br.edu.infnet.appvenda.model.repository.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Service
 public class VeiculoService {
 
     @Autowired
-    private AutomovelService automovelService;
-    @Autowired
-    private  MotocicletaService motocicletaService;
-    @Autowired
-    private  CaminhaoService caminhaoService;
+    private VeiculoRepository veiculoRepository;
 
 
     public List<Veiculo> obterLista(){
-
-        List<Veiculo> veiculos = new ArrayList<Veiculo>();
-        veiculos.addAll(automovelService.obterLista());
-        veiculos.addAll(motocicletaService.obterLista());
-        veiculos.addAll(caminhaoService.obterLista());
-
-        return veiculos;
+        return (List<Veiculo>) veiculoRepository.findAll();
     }
 
+
+    public List<Veiculo> obterLista(Usuario usuario){
+        return (List<Veiculo>) veiculoRepository.findAll(usuario.getId());
+    }
+
+    public void excluir(Integer id){
+        veiculoRepository.deleteById(id);
+    }
 }

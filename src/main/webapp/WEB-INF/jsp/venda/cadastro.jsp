@@ -16,7 +16,7 @@
 
 
 
-    <form action="/automovel/incluir" method="post">
+    <form action="/venda/incluir" method="post">
 
 
 
@@ -40,7 +40,7 @@
             <c:forEach var="v" items="${veiculos}">
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" value="">${v.nome}
+                        <input type="checkbox" class="form-check-input" value="${v}">${v.nome}
                     </label>
                 </div>
             </c:forEach>

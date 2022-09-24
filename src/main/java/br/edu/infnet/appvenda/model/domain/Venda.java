@@ -4,17 +4,35 @@ import br.edu.infnet.appvenda.exceptions.CompradorNuloException;
 import br.edu.infnet.appvenda.exceptions.VendaSemVeiculosException;
 import br.edu.infnet.appvenda.interfaces.IPrinter;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+@Entity
+@Table(name = "TVenda")
 public class Venda implements IPrinter {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String descricao;
     private LocalDateTime data;
     private boolean avista;
+
+    @OneToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "idComprador" )
     private Comprador comprador;
+
+    @ManyToMany(cascade = CascadeType.DETACH)
     private Set<Veiculo> veiculos;
+
+
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuario;
+
+    public Venda() {
+    }
 
     public Venda(Comprador comprador, Set<Veiculo> veiculos) throws CompradorNuloException, VendaSemVeiculosException {
 
@@ -70,16 +88,14 @@ public class Venda implements IPrinter {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return descricao + ";" +data + ";" +avista + ";" + comprador + ";" + "Quantidade de Veículos: " + veiculos.size();
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    @Override
-    public void impressao() {
-        System.out.println("#Venda");
-        System.out.println(this);
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
+
 
     public Comprador getComprador() {
         return comprador;
@@ -95,5 +111,16 @@ public class Venda implements IPrinter {
 
     public void setVeiculos(Set<Veiculo> veiculos) {
         this.veiculos = veiculos;
+    }
+
+    @Override
+    public String toString() {
+        return descricao + ";" +data + ";" +avista + ";" + comprador + ";" + "Quantidade de Veículos: " + veiculos.size();
+    }
+
+    @Override
+    public void impressao() {
+        System.out.println("#Venda");
+        System.out.println(this);
     }
 }

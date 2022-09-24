@@ -16,9 +16,20 @@ public class Usuario implements IPrinter {
     private String nome;
     private  String senha;
     private  String email;
+
     @OneToMany
     @JoinColumn(name = "idUsuario")
     private List<Comprador> compradores;
+
+    @OneToMany
+    @JoinColumn(name = "idUsuario")
+    private List<Veiculo> veiculos;
+
+
+    @OneToMany
+    @JoinColumn(name = "idUsuario")
+    private List<Venda> vendas;
+
 
     public Usuario(String nome, String senha, String email) {
         this.nome = nome;
@@ -67,6 +78,22 @@ public class Usuario implements IPrinter {
 
     public void setCompradores(List<Comprador> compradores) {
         this.compradores = compradores;
+    }
+
+    public List<Veiculo> getVeiculos() {
+        return veiculos;
+    }
+
+    public void setVeiculos(List<Veiculo> veiculos) {
+        this.veiculos = veiculos;
+    }
+
+    public List<Venda> getVendas() {
+        return vendas;
+    }
+
+    public void setVendas(List<Venda> vendas) {
+        this.vendas = vendas;
     }
 
     @Override

@@ -17,21 +17,25 @@
 
 
 
-    <h3>Classe: Veiculo</h3>
+    <h3>Listagem de Veiculos</h3>
     <table class="table table-striped">
         <thead>
         <tr>
+            <th>ID</th>
             <th>Nome</th>
             <th>Valor</th>
             <th>Marca</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         <c:forEach var="v" items="${listagem}">
             <tr>
+                <td>${v.id}</td>
                 <td>${v.nome}</td>
                 <td>${v.valor}</td>
                 <td>${v.marca}</td>
+                <td><a href="/veiculo/${v.id}/excluir">excluir</a></td>
             </tr>
         </c:forEach>
         </tbody>

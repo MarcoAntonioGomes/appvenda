@@ -2,6 +2,7 @@ package br.edu.infnet.appvenda.service;
 
 
 import br.edu.infnet.appvenda.model.domain.Automovel;
+import br.edu.infnet.appvenda.model.domain.Usuario;
 import br.edu.infnet.appvenda.model.repository.AutomovelRepository;
 import br.edu.infnet.appvenda.model.test.AppImpressao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,8 @@ public class AutomovelService {
         return (Collection<Automovel>) automovelRepository.findAll();
     }
 
+    public  Collection<Automovel> obterLista(Usuario usuario){
+        return (Collection<Automovel>) automovelRepository.findAll(usuario.getId());
+    }
 
 }

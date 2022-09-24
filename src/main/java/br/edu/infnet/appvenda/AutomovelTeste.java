@@ -1,12 +1,14 @@
 package br.edu.infnet.appvenda;
 
-import br.edu.infnet.appvenda.controller.AutomovelController;
+
 import br.edu.infnet.appvenda.exceptions.QuantidadePortasInvalidoException;
 import br.edu.infnet.appvenda.model.domain.Automovel;
+import br.edu.infnet.appvenda.model.domain.Usuario;
 import br.edu.infnet.appvenda.service.AutomovelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -16,6 +18,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Component
+@Order(2)
 public class AutomovelTeste implements ApplicationRunner {
 
     @Autowired
@@ -26,7 +29,8 @@ public class AutomovelTeste implements ApplicationRunner {
     public void run(ApplicationArguments args)  {
 
         System.out.println("#automovel");
-
+        Usuario usuario = new Usuario();
+        usuario.setId(1);
 
 
         String dir = "C:/Users/marco/Desktop/POS-PROJETOS/appvenda/src/main/resources/files/";
@@ -54,6 +58,7 @@ public class AutomovelTeste implements ApplicationRunner {
                             automovel1.setNome(campos.get(2));
                             automovel1.setValor(Float.parseFloat(campos.get(3)));
                             automovel1.setMarca(campos.get(4));
+                            automovel1.setUsuario(usuario);
                             System.out.println("Cálculo de venda: "+automovel1.calcularVenda());
                             automovelService.incluir(automovel1);
 

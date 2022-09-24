@@ -1,13 +1,15 @@
 package br.edu.infnet.appvenda;
 
 
-import br.edu.infnet.appvenda.controller.CaminhaoController;
+
 import br.edu.infnet.appvenda.exceptions.CapacidadeTransporteInvalidaException;
 import br.edu.infnet.appvenda.model.domain.Caminhao;
+import br.edu.infnet.appvenda.model.domain.Usuario;
 import br.edu.infnet.appvenda.service.CaminhaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -17,6 +19,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Component
+@Order(3)
 public class CaminhaoTeste implements ApplicationRunner {
 
     @Autowired
@@ -26,6 +29,8 @@ public class CaminhaoTeste implements ApplicationRunner {
     public void run(ApplicationArguments args) {
 
         System.out.println("#caminhao");
+        Usuario usuario = new Usuario();
+        usuario.setId(1);
 
         String dir = "C:/Users/marco/Desktop/POS-PROJETOS/appvenda/src/main/resources/files/";
         String arq = "veiculos.txt";
@@ -53,6 +58,7 @@ public class CaminhaoTeste implements ApplicationRunner {
                             caminhao1.setNome(campos.get(4));
                             caminhao1.setMarca(campos.get(5));
                             caminhao1.setValor(Float.valueOf(campos.get(6)));
+                            caminhao1.setUsuario(usuario);
                             System.out.println("Cálculo de venda: " + caminhao1.calcularVenda());
                             caminhaoService.incluir(caminhao1);
                         }
