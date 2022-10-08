@@ -29,9 +29,9 @@ public class VendaController {
     private VeiculoService veiculoService;
 
     @GetMapping(value = "/venda/lista")
-    public String telaLista(Model model) {
+    public String telaLista(Model model, @SessionAttribute("user") Usuario usuario) {
 
-        model.addAttribute("listagem", vendaService.obterLista());
+        model.addAttribute("listagem", vendaService.obterLista(usuario));
         return "venda/lista";
     }
 

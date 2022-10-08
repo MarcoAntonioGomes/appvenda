@@ -32,9 +32,12 @@ public class Venda implements IPrinter {
     private Usuario usuario;
 
     public Venda() {
+        this.data =  LocalDateTime.now();
     }
 
     public Venda(Comprador comprador, Set<Veiculo> veiculos) throws CompradorNuloException, VendaSemVeiculosException {
+
+        this();
 
        if(comprador == null){
            throw new CompradorNuloException("Impossivel criar um pedido sem um solicitante");
@@ -50,7 +53,6 @@ public class Venda implements IPrinter {
 //       }
 
         this.comprador = comprador;
-        this.data =  LocalDateTime.now();
         this.veiculos = veiculos;
     }
 

@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,12 +22,12 @@
 
         <div class="mb-3 mt-3">
             <label>Quantidade de Portas:</label>
-            <input type="number" class="form-control"  placeholder="Entre com a quantidade de portas do veículo" name="quantidadeDePortas">
+            <input type="number" class="form-control"  placeholder="Entre com a quantidade de portas do veÃ­culo" name="quantidadeDePortas">
         </div>
 
         <div class="mb-3 mt-3">
             <label>Tipo:</label>
-            <input type="text" class="form-control"  placeholder="Entre com o tipo do veículo" name="tipo">
+            <input type="text" class="form-control"  placeholder="Entre com o tipo do veÃ­culo" name="tipo">
         </div>
 
 

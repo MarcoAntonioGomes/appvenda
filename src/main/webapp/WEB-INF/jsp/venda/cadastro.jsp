@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +9,7 @@
 </head>
 <body>
 
+    <c:set var="ativaBotao"  value="" />
     <c:import url="/WEB-INF/jsp/menu.jsp"/>
 
 <div class="container mt-3">
@@ -21,36 +22,45 @@
 
 
         <div class="mb-3 mt-3">
-            <label>DescriÁ„o:</label>
-            <input type="text" class="form-control"  placeholder="Entre com a descriÁ„o da venda" name="descricao">
+            <label>Descri√ß√£o:</label>
+            <input type="text" class="form-control"  placeholder="Entre com a descri√ß√£o da venda" name="descricao">
         </div>
 
         <div class="mb-3 mt-3">
-            <label>Comprador:</label>
-            <select class="form-select">
-              <c:forEach var="s" items="${compradores}" >
-                  <option>${s.nome}</option>
-              </c:forEach>
-            </select>
+            <c:if test="${not empty compradores}">
+                <label>Comprador:</label>
+                <select name="comprador" class="form-select">
+                  <c:forEach var="c" items="${compradores}" >
+                      <option value="${c.id}">${c.nome}</option>
+                  </c:forEach>
+                </select>
+            </c:if>
+            <c:if test="${empty compradores}">
+                <label>N√£o existem compradores cadastrados:</label>
+                <c:set var="ativaBotao" value="disabled"></c:set>
+            </c:if>
         </div>
 
         <div class="mb-3 mt-3">
-            <label>VeÌculos:</label>
-
-            <c:forEach var="v" items="${veiculos}">
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" value="${v}">${v.nome}
-                    </label>
-                </div>
-            </c:forEach>
-
-
+            <c:if test="${not empty veiculos}">
+            <label>Ve√≠culos:</label>
+                <c:forEach var="v" items="${veiculos}">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="veiculos" value="${v.id}">${v.nome}
+                        </label>
+                    </div>
+                </c:forEach>
+            </c:if>
+            <c:if test="${empty veiculos}">
+                <label>N√£o exitem ve√≠culos cadatrados</label>
+                <c:set var="ativaBotao" value="disabled"></c:set>
+            </c:if>
         </div>
 
 
 
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
+        <button ${ativaBotao} type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
 </div>
 

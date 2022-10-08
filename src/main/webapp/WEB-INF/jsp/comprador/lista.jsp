@@ -15,8 +15,13 @@
     <h2>AppVendas</h2>
     <p>Projeto de Gestão de Venda de Veículos</p>
 
+    <c:if test="${not empty mensagem}">
+        <div class="alert ${tipo}">
+            <strong>Informação:</strong> ${mensagem}
+        </div>
+    </c:if>
 
-    <h3>Classe: Comprador</h3>
+    <h3>Cadastramento de Compradores</h3>
 
     <h4><a href="/comprador">Novo</a></h4>
 

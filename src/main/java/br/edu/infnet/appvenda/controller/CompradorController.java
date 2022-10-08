@@ -16,12 +16,15 @@ public class CompradorController {
 
     @Autowired
     private CompradorService compradorService;
+    private String mensagem;
+    private String tipo;
 
     @GetMapping(value = "/comprador/lista")
     public String telaLista(Model model, @SessionAttribute("user") Usuario usuario){
 
         model.addAttribute("listagem", compradorService.obterLista(usuario));
-
+        model.addAttribute("mensagem", mensagem);
+        model.addAttribute("tipo", tipo);
         return "comprador/lista";
     }
 
@@ -29,7 +32,15 @@ public class CompradorController {
     @GetMapping(value = "/comprador/{id}/excluir")
     public String excluir(@PathVariable Integer id){
 
-        compradorService.excluir(id);
+        try{
+            compradorService.excluir(id);
+            mensagem =  "Exclusão do comprador " + id + "realizada com sucesso!!!";
+            tipo = "alert-success";
+        }catch (Exception e){
+            mensagem =  "Impossivel realizar a exclusão do comprador " + id + "!!!";
+            tipo = "alert-danger";
+        }
+
         return "redirect:/comprador/lista";
     }
 
@@ -44,8 +55,10 @@ public class CompradorController {
     public String incluir(Comprador comprador, @SessionAttribute("user") Usuario usuario){
 
         comprador.setUsuario(usuario);
-
         compradorService.incluir(comprador);
+
+        mensagem =  "Inclusão do comprador " + comprador.getNome() + " realizada com sucesso!!!";
+        tipo = "alert-success";
 
         return "redirect:/comprador/lista";
     }
